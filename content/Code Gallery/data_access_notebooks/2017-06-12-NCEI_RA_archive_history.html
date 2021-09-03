@@ -23,7 +23,7 @@
 
     
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
@@ -44,7 +44,7 @@
     <script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
@@ -83,7 +83,7 @@
 </div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p class="caption">
  <span class="caption-text">
@@ -416,11 +416,11 @@
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/ioos/notebooks_demos"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/ioos/ioos_code_lab"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/ioos/notebooks_demos/issues/new?title=Issue%20on%20page%20%2Fcontent/Code Gallery/data_access_notebooks/2017-06-12-NCEI_RA_archive_history.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/ioos/ioos_code_lab/issues/new?title=Issue%20on%20page%20%2Fcontent/Code Gallery/data_access_notebooks/2017-06-12-NCEI_RA_archive_history.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -441,7 +441,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://binder.pangeo.io/v2/gh/ioos/notebooks_demos/master?urlpath=lab/tree/jupyterbook/content/Code Gallery/data_access_notebooks/2017-06-12-NCEI_RA_archive_history.ipynb"><button type="button"
+        <a class="binder-button" href="https://binder.pangeo.io/v2/gh/ioos/ioos_code_lab/master?urlpath=lab/tree/jupyterbook/content/Code Gallery/data_access_notebooks/2017-06-12-NCEI_RA_archive_history.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../../_static/images/logo_binder.svg"
@@ -449,7 +449,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/ioos/notebooks_demos/blob/master/jupyterbook/content/Code Gallery/data_access_notebooks/2017-06-12-NCEI_RA_archive_history.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/ioos/ioos_code_lab/blob/master/jupyterbook/content/Code Gallery/data_access_notebooks/2017-06-12-NCEI_RA_archive_history.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../../../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -466,7 +466,7 @@
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ioos-regional-associations-archive-their-non-federal-observational-data-with-noaa-s-national-center-for-environmental-information-ncei-in-this-notebook-we-will-use-the-restful-services-of-the-ncei-geoportal-to-collect-metadata-from-the-archival-information-packages-found-in-the-ncei-archives-the-metadata-information-are-stored-in-iso-19115-2-xml-files-which-the-ncei-geoportal-uses-for-discovery-of-archival-information-packages-aips-this-example-uses-the-iso-metadata-records-to-display-publication-information-as-well-as-plot-the-time-coverage-of-each-aip-at-ncei-which-meets-the-search-criteria">
@@ -512,7 +512,9 @@
 <p>First we import the owslib and numpy package. This allows us to parse the ISO xml records and process the information we gather.</p>
 <p>Initialize a counter for plotting and a list to collect the NCEI Accession identifiers (we use this in the plotting routine). Also, update the namespaces dictionary from owslib to include the appropriate namespace reference for gmi and gml.</p>
 <p>For more information on ISO Namespaces see:  <a class="reference external" href="https://geo-ide.noaa.gov/wiki/index.php?title=ISO_Namespaces">https://geo-ide.noaa.gov/wiki/index.php?title=ISO_Namespaces</a></p>
-<div class="cell docutils container">
+<div class="alert alert-danger">
+  <strong>This notebook is stale and won't run due to missing data upstream and changes in the libraries used.</strong>
+</div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">owslib.iso</span> <span class="kn">import</span> <span class="n">namespaces</span>
 
@@ -835,7 +837,7 @@ Current AIP Size = 89.956 MB
 Bounding Time = 2005-06-16 TO 2016-12-31
 </pre></div>
 </div>
-<img alt="../../../_images/2017-06-12-NCEI_RA_archive_history_9_1.png" src="../../../_images/2017-06-12-NCEI_RA_archive_history_9_1.png" />
+<img alt="../../../_images/2017-06-12-NCEI_RA_archive_history_10_1.png" src="../../../_images/2017-06-12-NCEI_RA_archive_history_10_1.png" />
 </div>
 </div>
 <p>This procedure has been developed as an example of how to use NCEI’s geoportal REST API’s to collect information about packages that have been archived at NCEI. The intention is to provide some guidance and ways to collect this information without having to request it directly from NCEI. There are a significant amount of metadata elements which NCEI makes available through their ISO metadata records. Therefore, anyone interested in collecting other information from the records at NCEI should have a look at the ISO metadata records and determine which items are of interest to their community. Then, update the example code provided to collect that information.</p>
@@ -865,12 +867,32 @@ Bounding Time = 2005-06-16 TO 2016-12-31
               </div>
               
         
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="2017-03-21-ERDDAP_IOOS_Sensor_Map.html" title="previous page">Read realtime data from IOOS Sensor Map via ERDDAP tabledap</a>
-    <a class='right-next' id="next-link" href="2017-07-25-HFRadar_currents.html" title="next page">Near real-time HF-Radar currents in the proximity of the Deepwater Horizon site</a>
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="2017-03-21-ERDDAP_IOOS_Sensor_Map.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Read realtime data from IOOS Sensor Map via ERDDAP tabledap</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="2017-07-25-HFRadar_currents.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Near real-time HF-Radar currents in the proximity of the Deepwater Horizon site</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
         
         </div>
     </div>
@@ -895,5 +917,12 @@ Bounding Time = 2005-06-16 TO 2016-12-31
   <script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
   
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-546J258RCJ"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('config', 'G-546J258RCJ');
+                </script>
+
   </body>
 </html>

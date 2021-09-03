@@ -23,7 +23,7 @@
 
     
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
@@ -44,7 +44,7 @@
     <script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
@@ -83,7 +83,7 @@
 </div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p class="caption">
  <span class="caption-text">
@@ -416,11 +416,11 @@
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/ioos/notebooks_demos"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/ioos/ioos_code_lab"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/ioos/notebooks_demos/issues/new?title=Issue%20on%20page%20%2Fcontent/Code Gallery/data_access_notebooks/2017-03-21-ERDDAP_IOOS_Sensor_Map.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/ioos/ioos_code_lab/issues/new?title=Issue%20on%20page%20%2Fcontent/Code Gallery/data_access_notebooks/2017-03-21-ERDDAP_IOOS_Sensor_Map.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -441,7 +441,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://binder.pangeo.io/v2/gh/ioos/notebooks_demos/master?urlpath=lab/tree/jupyterbook/content/Code Gallery/data_access_notebooks/2017-03-21-ERDDAP_IOOS_Sensor_Map.ipynb"><button type="button"
+        <a class="binder-button" href="https://binder.pangeo.io/v2/gh/ioos/ioos_code_lab/master?urlpath=lab/tree/jupyterbook/content/Code Gallery/data_access_notebooks/2017-03-21-ERDDAP_IOOS_Sensor_Map.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../../_static/images/logo_binder.svg"
@@ -449,7 +449,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/ioos/notebooks_demos/blob/master/jupyterbook/content/Code Gallery/data_access_notebooks/2017-03-21-ERDDAP_IOOS_Sensor_Map.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/ioos/ioos_code_lab/blob/master/jupyterbook/content/Code Gallery/data_access_notebooks/2017-03-21-ERDDAP_IOOS_Sensor_Map.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../../../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -480,11 +480,13 @@ had selected buoy 44011 on George’s Bank:</p>
 <p><img alt="2017-03-27_16-21-08" src="https://cloud.githubusercontent.com/assets/1872600/24376518/213e6c4c-130a-11e7-9744-2f23e9660adf.png" /></p>
 <p>You click the <code class="docutils literal notranslate"><span class="pre">ERDDAP</span></code> link and generate a URL to download the data as <code class="docutils literal notranslate"><span class="pre">CSV</span></code> <img alt="2017-03-27_16-24-35" src="https://cloud.githubusercontent.com/assets/1872600/24376521/2377afc8-130a-11e7-9a3b-c1c46e43d20d.png" />.</p>
 <p>You notice that the URL that is generated</p>
-<p>[<code class="docutils literal notranslate"><span class="pre">https://erddap.axiomdatascience.com/erddap/tabledap/sensor_service.csvp?time,depth,station,parameter,unit,value&amp;time&gt;=2017-02-27T12:00:00Z&amp;station=&quot;urn:ioos:station:wmo:44011&quot;&amp;parameter=&quot;Significant</span> <span class="pre">Wave</span> <span class="pre">Height&quot;&amp;unit=&quot;m&quot;</span></code>](<a class="reference external" href="http://erddap.axiomdatascience.com/erddap/tabledap/sensor_service.csvp?time,depth,station,parameter,unit,value&amp;time">http://erddap.axiomdatascience.com/erddap/tabledap/sensor_service.csvp?time,depth,station,parameter,unit,value&amp;time</a>&gt;=2017-02-27T12:00:00Z&amp;station=”urn:ioos:station:wmo:44011”&amp;parameter=”Significant Wave Height”&amp;unit=”m”)</p>
+<p><a class="reference external" href="https://erddap.axiomdatascience.com/erddap/tabledap/sensor_service.csvp%3Ftime%2Cdepth%2Cstation%2Cparameter%2Cunit%2Cvalue%26time%3E%3D2017-02-27T12%3A00%3A00Z%26station%3D%22urn%3Aioos%3Astation%3Awmo%3A44011%22%26parameter%3D%22Significant%20Wave%20Height%22%26unit%3D%22m%22">https://erddap.axiomdatascience.com/erddap/tabledap/sensor_service.csvp?time,depth,station,parameter,unit,value&amp;time&gt;=2017-02-27T12:00:00Z&amp;station=”urn:ioos:station:wmo:44011”&amp;parameter=”Significant Wave Height”&amp;unit=”m”</a></p>
 <p>is fairly easy to understand,
 and that a program could construct that URL fairly easily.
 Let’s explore how that could work…</p>
-<div class="cell docutils container">
+<div class="alert alert-danger">
+  <strong>This notebook is stale and won't run due to missing data upstream and changes in the libraries used.</strong>
+</div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
 
@@ -690,7 +692,7 @@ Let’s explore how that could work…</p>
   items = np.asanyarray(items)
 </pre></div>
 </div>
-<img alt="../../../_images/2017-03-21-ERDDAP_IOOS_Sensor_Map_7_1.png" src="../../../_images/2017-03-21-ERDDAP_IOOS_Sensor_Map_7_1.png" />
+<img alt="../../../_images/2017-03-21-ERDDAP_IOOS_Sensor_Map_8_1.png" src="../../../_images/2017-03-21-ERDDAP_IOOS_Sensor_Map_8_1.png" />
 </div>
 </div>
 <p>You may notice that slicing the time dimension on the sever side is very fast when compared with an OPeNDAP request. The downloading of the time dimension data, slice, and subsequent downloading of the actual data are all much faster.</p>
@@ -824,7 +826,7 @@ Let’s explore how that could work…</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/2017-03-21-ERDDAP_IOOS_Sensor_Map_11_0.png" src="../../../_images/2017-03-21-ERDDAP_IOOS_Sensor_Map_11_0.png" />
+<img alt="../../../_images/2017-03-21-ERDDAP_IOOS_Sensor_Map_12_0.png" src="../../../_images/2017-03-21-ERDDAP_IOOS_Sensor_Map_12_0.png" />
 </div>
 </div>
 <p>Wow! Wintertime is pretty rough out on George’s Bank!</p>
@@ -911,12 +913,32 @@ Here is how to get a <code class="docutils literal notranslate"><span class="pre
               </div>
               
         
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="2017-01-18-siphon-explore-thredds.html" title="previous page">Exploring the THREDDS catalog with Unidata’s Siphon</a>
-    <a class='right-next' id="next-link" href="2017-06-12-NCEI_RA_archive_history.html" title="next page">Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data</a>
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="2017-01-18-siphon-explore-thredds.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Exploring the THREDDS catalog with Unidata’s Siphon</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="2017-06-12-NCEI_RA_archive_history.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
         
         </div>
     </div>
@@ -941,5 +963,12 @@ Here is how to get a <code class="docutils literal notranslate"><span class="pre
   <script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
   
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-546J258RCJ"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('config', 'G-546J258RCJ');
+                </script>
+
   </body>
 </html>
