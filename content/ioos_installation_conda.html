@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -33,19 +33,19 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -74,6 +74,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../_static/IOOS_logo.png" class="logo" alt="logo">
       
       
@@ -85,7 +89,7 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p class="caption" role="heading">
  <span class="caption-text">
   Code Gallery
  </span>
@@ -284,7 +288,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Video Tutorials
  </span>
@@ -316,7 +320,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Other Resources
  </span>
@@ -348,7 +352,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Contact Us
  </span>
@@ -474,6 +478,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#updating-the-ioos-environment">
+   Updating the IOOS environment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#why-we-use-and-recommend-conda">
    Why we use and recommend conda
   </a>
@@ -481,6 +490,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-to-get-help">
    How to get help
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#appendix-conda-lock">
+   Appendix: conda-lock
   </a>
  </li>
 </ul>
@@ -494,7 +508,7 @@
         
               <div>
                 
-  <div class="section" id="installing-the-ioos-conda-environment">
+  <div class="tex2jax_ignore mathjax_ignore section" id="installing-the-ioos-conda-environment">
 <h1>Installing the IOOS conda environment<a class="headerlink" href="#installing-the-ioos-conda-environment" title="Permalink to this headline">¶</a></h1>
 <p>For IOOS python users we recommend the free
 <a class="reference external" href="http://conda.pydata.org/miniconda.html">Miniconda</a> Python distribution,
@@ -507,8 +521,8 @@ you can install it by typing <code class="docutils literal notranslate"><span cl
 <div class="section" id="install">
 <h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
 <p>Download and install the appropriate Miniconda installer from <a class="reference external" href="http://conda.pydata.org/miniconda.html">http://conda.pydata.org/miniconda.html</a>.
-With conda you can create environments that use any Python version (e.g. Python 2.7 or Python 3.9),
-so install the latest Python 3 and if find out later you need a Python 2.7 environment,
+With conda you can create environments that use any Python version (e.g. Python 2.7 or Python 3.x),
+so install the latest Python 3.x and if find out later you need a Python 2.7 environment,
 you can create one.
 Windows users also need to choose between 32-bit (old Windows XP) or 64-bit (modern Windows) versions.</p>
 <div class="section" id="windows">
@@ -575,6 +589,20 @@ you can type</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="updating-the-ioos-environment">
+<h2>Updating the IOOS environment<a class="headerlink" href="#updating-the-ioos-environment" title="Permalink to this headline">¶</a></h2>
+<p>To update an existing environment you can do,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda update --all --yes
+</pre></div>
+</div>
+<p>Sometimes that operation can be slow if you have a really old version of the environment, or even impossible to update.
+In that case we recommend removing and re-creating the environment. To remove an existing environment you have to run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda env remove -name IOOS
+</pre></div>
+</div>
+<p>and follow the instructions from above to re-create. Note that you don’t need to re-install miniconda.
+Just download a fresh version of the environment file and re-create it.</p>
+</div>
 <div class="section" id="why-we-use-and-recommend-conda">
 <h2>Why we use and recommend conda<a class="headerlink" href="#why-we-use-and-recommend-conda" title="Permalink to this headline">¶</a></h2>
 <p>Conda users can just <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span></code>,
@@ -591,6 +619,21 @@ Check out <a class="reference external" href="http://technicaldiscovery.blogspot
 <li><p>Raise an issue <a class="reference external" href="https://github.com/ioos/ioos_code_lab/issues">here</a></p></li>
 <li><p>Please get help on the <a class="reference external" href="https://groups.google.com/forum/?hl=en#%21forum/ioos_tech">IOOS-tech Google Group</a></p></li>
 </ul>
+</div>
+<div class="section" id="appendix-conda-lock">
+<h2>Appendix: conda-lock<a class="headerlink" href="#appendix-conda-lock" title="Permalink to this headline">¶</a></h2>
+<p>Locking environments can be useful for reproducibility, Continuous Integration (CI), or when one requires faster installation.
+The reason is because a locked environment saves the “solved” list of packages and only downloads them.
+Making it much faster than creating from the environment file and ensuring that the same packages from the time you locked will be used.</p>
+<p>To lock an environment you will need to install conda-lock,</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda install conda-lock
+</pre></div>
+</div>
+<p>then execute the locking command targeting the environment file you want to lock and the platforms, like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda-lock -f environment.yml -p osx-64 -p linux-64 -p win-64
+</pre></div>
+</div>
+<p>In the example above we are locking for macOS, Linux and Windows.</p>
 </div>
 </div>
 
@@ -646,7 +689,7 @@ Check out <a class="reference external" href="http://technicaldiscovery.blogspot
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         
