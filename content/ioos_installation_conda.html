@@ -21,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -602,6 +602,11 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#add-mamba-solver">
+   Add mamba solver
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-the-ioos-conda-environment">
    Create the IOOS conda environment
   </a>
@@ -685,6 +690,11 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#add-mamba-solver">
+   Add mamba solver
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-the-ioos-conda-environment">
    Create the IOOS conda environment
   </a>
@@ -743,17 +753,21 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="installing-the-ioos-conda-environment">
 <h1>Installing the IOOS conda environment<a class="headerlink" href="#installing-the-ioos-conda-environment" title="Permalink to this headline">#</a></h1>
-<p>For IOOS Python/R users we recommend the free
+<p>For IOOS Python/R/Julia users we recommend the free
 <a class="reference external" href="https://github.com/conda-forge/miniforge">Miniforge</a> distribution,
 a lightweight version of the <a class="reference external" href="https://store.continuum.io/cshop/anaconda/">Anaconda Scientific Python Distribution</a> with the conda-forge channel pre-configured.
 While the full Anaconda distribution will also work,
-it is faster to install Miniforge or Mambaforge (which provides mamba, a faster drop-in replacement for conda)
-and you can install only the packages you need.
+it is faster to install Miniforge and you can install only the packages you need.
 If for some reason you decide later that you want the full Anaconda distribution,
-you can install it by typing <code class="docutils literal notranslate"><span class="pre">mamba</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">defaults</span> <span class="pre">anaconda</span></code> using Mambaforge.</p>
+you can install it by typing <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">defaults</span> <span class="pre">anaconda</span></code>.</p>
+<p>Note that if you have the Anaconda Distribution,
+or any other installation,
+in your machine you may want to follow
+<a class="reference external" href="https://docs.anaconda.com/anaconda/install/uninstall">these uninstall instructions</a>
+before proceeding.</p>
 <section id="install">
 <h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">#</a></h2>
-<p>Download and install the appropriate Mambaforge installer from
+<p>Download and install the appropriate Miniforge3 installer from
 <a class="reference external" href="https://github.com/conda-forge/miniforge">https://github.com/conda-forge/miniforge</a>.</p>
 <section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">#</a></h3>
@@ -761,20 +775,47 @@ you can install it by typing <code class="docutils literal notranslate"><span cl
 Choose <em>Just Me</em> (not <em>All Users</em>),
 and choose a install location owned by you.
 The default is fine but kind of long.
-We recommend something on your C drive like <code class="docutils literal notranslate"><span class="pre">C:\Mambaforge</span></code>.</p>
+We recommend something on your C drive like <code class="docutils literal notranslate"><span class="pre">C:\Miniforge</span></code>.</p>
 <p>On the “Advanced Installation Options” screen,
-uncheck the boxes to make Mambaforge your default Python to avoid conflicts with any existing installation.</p>
+uncheck the boxes to make Miniforge your default Python to avoid conflicts with any existing installation.</p>
+<p><img alt="miniforge_select_box" src="../_images/miniforge_select_box.png" /></p>
 </section>
 <section id="linux-macos">
 <h3>Linux/macOS<a class="headerlink" href="#linux-macos" title="Permalink to this headline">#</a></h3>
 <p>Copy-and-paste this in the terminal:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl -L -O <span class="s2">&quot;https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-</span><span class="k">$(</span>uname<span class="k">)</span><span class="s2">-</span><span class="k">$(</span>uname -m<span class="k">)</span><span class="s2">.sh&quot;</span>
-bash Mambaforge-<span class="k">$(</span>uname<span class="k">)</span>-<span class="k">$(</span>uname -m<span class="k">)</span>.sh
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl -L -O <span class="s2">&quot;https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-</span><span class="k">$(</span>uname<span class="k">)</span><span class="s2">-</span><span class="k">$(</span>uname -m<span class="k">)</span><span class="s2">.sh&quot;</span>
+
+bash Miniforge-<span class="k">$(</span>uname<span class="k">)</span>-<span class="k">$(</span>uname -m<span class="k">)</span>.sh
 </pre></div>
 </div>
 <p>and use all the default options,
 except for the license agreement where you must actively change it to <code class="docutils literal notranslate"><span class="pre">yes</span></code>.</p>
 </section>
+</section>
+<section id="add-mamba-solver">
+<h2>Add mamba solver<a class="headerlink" href="#add-mamba-solver" title="Permalink to this headline">#</a></h2>
+<p>The first thing we will do is to install the mamba solver and add it to our <code class="docutils literal notranslate"><span class="pre">.condarc</span></code>.
+This make the faster mamba solver default in our installations.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">--</span><span class="n">name</span> <span class="n">base</span> <span class="n">conda</span><span class="o">-</span><span class="n">libmamba</span><span class="o">-</span><span class="n">solver</span> <span class="o">--</span><span class="n">yes</span>
+<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="nb">set</span> <span class="n">experimental_solver</span> <span class="n">libmamba</span>
+</pre></div>
+</div>
+<p>If that worked you should see:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>***
+
+NOTE: You are using the EXPERIMENTAL libmamba solver integration.
+
+If something is not working as expected, please:
+
+1. Go to https://github.com/conda/conda/issues/new/choose
+2. Choose the &quot;Libmamba Solver Feedback (Experimental Feature)&quot; option
+
+Thank you for your help!
+
+***
+</pre></div>
+</div>
+<p>For more info see: <a class="reference external" href="https://github.com/conda/conda-libmamba-solver">https://github.com/conda/conda-libmamba-solver</a>.</p>
 </section>
 <section id="create-the-ioos-conda-environment">
 <h2>Create the IOOS conda environment<a class="headerlink" href="#create-the-ioos-conda-environment" title="Permalink to this headline">#</a></h2>
@@ -786,12 +827,20 @@ or, on <code class="docutils literal notranslate"><span class="pre">macOS</span>
 curl <span class="nv">$url</span> -o environment.yml
 </pre></div>
 </div>
+<p>Open the Miniforge Prompt by click on the icon below:</p>
+<p><img alt="prompt" src="../_images/prompt.png" /></p>
+<p>or open the Linux/macOS terminal.</p>
 <p>Then, from the directory where you saved the file above,
-type the following commands in the terminal or Windows command prompt:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mamba update --yes --all
-mamba env create --quiet --file environment.yml
+type the following command to update the packages in your base environment,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda update --yes --all
 </pre></div>
 </div>
+<p>and</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create --quiet --file environment.yml
+</pre></div>
+</div>
+<p>to create the IOOS environment locally.
+Change the file name to environment-python_and_r.yml if you chose to use the IOOS environment with R.</p>
 <p>That will update the packages in your base environment and then install the IOOS environment.
 This will trigger the download and installation of many packages,
 you should probably go get a coffee.</p>

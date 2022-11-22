@@ -21,7 +21,7 @@
     href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -727,7 +727,9 @@ including <a class="reference external" href="http://scitools.org.uk/iris/"><cod
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coordinates:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- CF Roles:   grid_topology: [&#39;grid&#39;]
+
+Coordinates:
 - CF Axes: * Z: [&#39;s_rho&#39;, &#39;s_w&#39;]
            * T: [&#39;ocean_time&#39;]
              X, Y: n/a
@@ -781,9 +783,9 @@ Data Variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filipe/miniforge3/envs/IOOS/lib/python3.10/site-packages/cf_xarray/accessor.py:1530: UserWarning: Variables {&#39;&#39;, &#39;time&#39;} not found in object but are referred to in the CF attributes.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filipe/micromamba/envs/IOOS/lib/python3.11/site-packages/cf_xarray/accessor.py:1638: UserWarning: Variables {&#39;&#39;, &#39;time&#39;} not found in object but are referred to in the CF attributes.
   warnings.warn(
-/home/filipe/miniforge3/envs/IOOS/lib/python3.10/site-packages/cf_xarray/accessor.py:1530: UserWarning: Variables {&#39;&#39;} not found in object but are referred to in the CF attributes.
+/home/filipe/micromamba/envs/IOOS/lib/python3.11/site-packages/cf_xarray/accessor.py:1638: UserWarning: Variables {&#39;&#39;} not found in object but are referred to in the CF attributes.
   warnings.warn(
 </pre></div>
 </div>
@@ -809,7 +811,7 @@ Data Variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filipe/miniforge3/envs/IOOS/lib/python3.10/site-packages/cf_xarray/accessor.py:1530: UserWarning: Variables {&#39;&#39;, &#39;time&#39;} not found in object but are referred to in the CF attributes.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filipe/micromamba/envs/IOOS/lib/python3.11/site-packages/cf_xarray/accessor.py:1638: UserWarning: Variables {&#39;&#39;, &#39;time&#39;} not found in object but are referred to in the CF attributes.
   warnings.warn(
 </pre></div>
 </div>
@@ -844,6 +846,7 @@ Data Variables:
 }
 
 html[theme=dark],
+body[data-theme=dark],
 body.vscode-dark {
   --xr-font-color0: rgba(255, 255, 255, 1);
   --xr-font-color2: rgba(255, 255, 255, 0.54);
@@ -1073,6 +1076,11 @@ body.vscode-dark {
   grid-column: 4;
 }
 
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
 .xr-var-name,
 .xr-var-dims,
 .xr-var-dtype,
@@ -1094,14 +1102,16 @@ body.vscode-dark {
 }
 
 .xr-var-attrs,
-.xr-var-data {
+.xr-var-data,
+.xr-index-data {
   display: none;
   background-color: var(--xr-background-color) !important;
   padding-bottom: 5px !important;
 }
 
 .xr-var-attrs-in:checked ~ .xr-var-attrs,
-.xr-var-data-in:checked ~ .xr-var-data {
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
   display: block;
 }
 
@@ -1111,13 +1121,16 @@ body.vscode-dark {
 
 .xr-var-name span,
 .xr-var-data,
+.xr-index-name div,
+.xr-index-data,
 .xr-attrs {
   padding-left: 25px !important;
 }
 
 .xr-attrs,
 .xr-var-attrs,
-.xr-var-data {
+.xr-var-data,
+.xr-index-data {
   grid-column: 1 / -1;
 }
 
@@ -1155,7 +1168,8 @@ dl.xr-attrs {
 }
 
 .xr-icon-database,
-.xr-icon-file-text2 {
+.xr-icon-file-text2,
+.xr-no-icon {
   display: inline-block;
   vertical-align: middle;
   width: 1em;
@@ -1179,21 +1193,21 @@ Attributes:
     time:           ocean_time
     field:          temperature, scalar, series
     _ChunkSizes:    [  1  36  82 130]
-    standard_name:  sea_water_potential_temperature</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'temp'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>run</span>: 1929</li><li><span>time</span>: 157</li><li><span class='xr-has-index'>s_rho</span>: 36</li><li><span>eta_rho</span>: 82</li><li><span>xi_rho</span>: 130</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-06556417-8f1d-4b58-95e5-0b96410ff70d' class='xr-array-in' type='checkbox' checked><label for='section-06556417-8f1d-4b58-95e5-0b96410ff70d' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>...</span></div><div class='xr-array-data'><pre>[116222867280 values with dtype=float32]</pre></div></div></li><li class='xr-section-item'><input id='section-3a37c4cc-4451-41a1-98a6-2cfb5b8543e7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-3a37c4cc-4451-41a1-98a6-2cfb5b8543e7' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>s_rho</span></div><div class='xr-var-dims'>(s_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.9861 -0.9583 ... -0.01389</div><input id='attrs-cc2e0255-68e0-4cca-84b3-34475ae7a53f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-cc2e0255-68e0-4cca-84b3-34475ae7a53f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6e5e6ffb-63c7-4ecb-bf78-899da5f2355a' class='xr-var-data-in' type='checkbox'><label for='data-6e5e6ffb-63c7-4ecb-bf78-899da5f2355a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd></dd><dt><span>long_name :</span></dt><dd>S-coordinate at RHO-points</dd><dt><span>valid_min :</span></dt><dd>-1.0</dd><dt><span>valid_max :</span></dt><dd>0.0</dd><dt><span>positive :</span></dt><dd>up</dd><dt><span>standard_name :</span></dt><dd>ocean_s_coordinate_g1</dd><dt><span>formula_terms :</span></dt><dd>s: s_rho C: Cs_r eta: zeta depth: h depth_c: hc</dd><dt><span>field :</span></dt><dd>s_rho, scalar</dd><dt><span>_CoordinateTransformType :</span></dt><dd>Vertical</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoZ</dd><dt><span>_CoordinateZisPositive :</span></dt><dd>up</dd><dt><span>_CoordinateAxes :</span></dt><dd>s_rho</dd></dl></div><div class='xr-var-data'><pre>array([-0.986111, -0.958333, -0.930556, -0.902778, -0.875   , -0.847222,
+    standard_name:  sea_water_potential_temperature</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'temp'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>run</span>: 1929</li><li><span>time</span>: 157</li><li><span class='xr-has-index'>s_rho</span>: 36</li><li><span>eta_rho</span>: 82</li><li><span>xi_rho</span>: 130</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-f46888e6-6e6a-4b0d-bbd0-8928802ec23f' class='xr-array-in' type='checkbox' checked><label for='section-f46888e6-6e6a-4b0d-bbd0-8928802ec23f' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>...</span></div><div class='xr-array-data'><pre>[116222867280 values with dtype=float32]</pre></div></div></li><li class='xr-section-item'><input id='section-0bca19c5-52a2-490c-b283-6d875b019e06' class='xr-section-summary-in' type='checkbox'  checked><label for='section-0bca19c5-52a2-490c-b283-6d875b019e06' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>s_rho</span></div><div class='xr-var-dims'>(s_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.9861 -0.9583 ... -0.01389</div><input id='attrs-3fefe0ed-f401-450b-9770-6543f576ae53' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3fefe0ed-f401-450b-9770-6543f576ae53' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d66d0826-7c89-4e78-a6cd-91a7af6dcd31' class='xr-var-data-in' type='checkbox'><label for='data-d66d0826-7c89-4e78-a6cd-91a7af6dcd31' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd></dd><dt><span>long_name :</span></dt><dd>S-coordinate at RHO-points</dd><dt><span>valid_min :</span></dt><dd>-1.0</dd><dt><span>valid_max :</span></dt><dd>0.0</dd><dt><span>positive :</span></dt><dd>up</dd><dt><span>standard_name :</span></dt><dd>ocean_s_coordinate_g1</dd><dt><span>formula_terms :</span></dt><dd>s: s_rho C: Cs_r eta: zeta depth: h depth_c: hc</dd><dt><span>field :</span></dt><dd>s_rho, scalar</dd><dt><span>_CoordinateTransformType :</span></dt><dd>Vertical</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoZ</dd><dt><span>_CoordinateZisPositive :</span></dt><dd>up</dd><dt><span>_CoordinateAxes :</span></dt><dd>s_rho</dd></dl></div><div class='xr-var-data'><pre>array([-0.986111, -0.958333, -0.930556, -0.902778, -0.875   , -0.847222,
        -0.819444, -0.791667, -0.763889, -0.736111, -0.708333, -0.680556,
        -0.652778, -0.625   , -0.597222, -0.569444, -0.541667, -0.513889,
        -0.486111, -0.458333, -0.430556, -0.402778, -0.375   , -0.347222,
        -0.319444, -0.291667, -0.263889, -0.236111, -0.208333, -0.180556,
-       -0.152778, -0.125   , -0.097222, -0.069444, -0.041667, -0.013889])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>run</span></div><div class='xr-var-dims'>(run)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2013-05-18 ... 2018-09-14</div><input id='attrs-cd52bf8f-8892-4717-8242-ee9721b21cf5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-cd52bf8f-8892-4717-8242-ee9721b21cf5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-735133c9-3c1c-4396-a23a-6d1e7e8bb94e' class='xr-var-data-in' type='checkbox'><label for='data-735133c9-3c1c-4396-a23a-6d1e7e8bb94e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Run time for ForecastModelRunCollection</dd><dt><span>standard_name :</span></dt><dd>forecast_reference_time</dd><dt><span>_CoordinateAxisType :</span></dt><dd>RunTime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2013-05-18T00:00:00.000000000&#x27;, &#x27;2013-05-19T00:00:00.000000000&#x27;,
+       -0.152778, -0.125   , -0.097222, -0.069444, -0.041667, -0.013889])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>run</span></div><div class='xr-var-dims'>(run)</div><div class='xr-var-dtype'>datetime64[ns]</div><div class='xr-var-preview xr-preview'>2013-05-18 ... 2018-09-14</div><input id='attrs-a767f81b-bac4-4efb-a880-9f77fa587de0' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a767f81b-bac4-4efb-a880-9f77fa587de0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-043f0457-0677-416e-b260-f50bcf249dae' class='xr-var-data-in' type='checkbox'><label for='data-043f0457-0677-416e-b260-f50bcf249dae' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>long_name :</span></dt><dd>Run time for ForecastModelRunCollection</dd><dt><span>standard_name :</span></dt><dd>forecast_reference_time</dd><dt><span>_CoordinateAxisType :</span></dt><dd>RunTime</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;2013-05-18T00:00:00.000000000&#x27;, &#x27;2013-05-19T00:00:00.000000000&#x27;,
        &#x27;2013-05-20T00:00:00.000000000&#x27;, ..., &#x27;2018-09-12T00:00:00.000000000&#x27;,
        &#x27;2018-09-13T00:00:00.000000000&#x27;, &#x27;2018-09-14T00:00:00.000000000&#x27;],
-      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>33.74 33.79 33.84 ... 42.82 42.87</div><input id='attrs-1f98ca0f-a9c5-43b4-b317-9394642095d4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1f98ca0f-a9c5-43b4-b317-9394642095d4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-45a999e6-8df9-4ed8-9a84-9605af594a6f' class='xr-var-data-in' type='checkbox'><label for='data-45a999e6-8df9-4ed8-9a84-9605af594a6f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>long_name :</span></dt><dd>latitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>field :</span></dt><dd>lat_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[ 82 130]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd></dl></div><div class='xr-var-data'><pre>array([[33.744605, 33.794267, 33.843908, ..., 39.803658, 39.849137, 39.894587],
+      dtype=&#x27;datetime64[ns]&#x27;)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lat_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>33.74 33.79 33.84 ... 42.82 42.87</div><input id='attrs-63013d8a-4e73-4b86-8a38-7e2eabbeea72' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-63013d8a-4e73-4b86-8a38-7e2eabbeea72' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-20dd32c2-0c9e-4073-a721-745aa69d1811' class='xr-var-data-in' type='checkbox'><label for='data-20dd32c2-0c9e-4073-a721-745aa69d1811' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>long_name :</span></dt><dd>latitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>field :</span></dt><dd>lat_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[ 82 130]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd></dl></div><div class='xr-var-data'><pre>array([[33.744605, 33.794267, 33.843908, ..., 39.803658, 39.849137, 39.894587],
        [33.784963, 33.834601, 33.884218, ..., 39.840616, 39.886067, 39.93149 ],
        [33.825301, 33.874916, 33.924509, ..., 39.877575, 39.923   , 39.968397],
        ...,
        [36.874968, 36.922822, 36.970654, ..., 42.708485, 42.752428, 42.796348],
        [36.91383 , 36.961662, 37.009472, ..., 42.744764, 42.788691, 42.832595],
-       [36.952673, 37.000482, 37.04827 , ..., 42.781022, 42.824933, 42.868822]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-75.84 -75.78 ... -71.49 -71.43</div><input id='attrs-ee18895b-9bdc-4c36-8172-b409ae9e40d5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ee18895b-9bdc-4c36-8172-b409ae9e40d5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8f1eb77e-4e30-4a3e-89be-38d8e4cd9aca' class='xr-var-data-in' type='checkbox'><label for='data-8f1eb77e-4e30-4a3e-89be-38d8e4cd9aca' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>long_name :</span></dt><dd>longitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>field :</span></dt><dd>lon_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[ 82 130]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd></dl></div><div class='xr-var-data'><pre>array([[-75.838286, -75.775218, -75.712149, ..., -67.832953, -67.770109,
+       [36.952673, 37.000482, 37.04827 , ..., 42.781022, 42.824933, 42.868822]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>lon_rho</span></div><div class='xr-var-dims'>(eta_rho, xi_rho)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-75.84 -75.78 ... -71.49 -71.43</div><input id='attrs-e7b7615e-d61c-4e59-ad37-e658527ebe6e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e7b7615e-d61c-4e59-ad37-e658527ebe6e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-63a4477e-8edc-4eb4-b5a7-f330497079d9' class='xr-var-data-in' type='checkbox'><label for='data-63a4477e-8edc-4eb4-b5a7-f330497079d9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>long_name :</span></dt><dd>longitude of RHO-points</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>field :</span></dt><dd>lon_rho, scalar</dd><dt><span>_ChunkSizes :</span></dt><dd>[ 82 130]</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd></dl></div><div class='xr-var-data'><pre>array([[-75.838286, -75.775218, -75.712149, ..., -67.832953, -67.770109,
         -67.707269],
        [-75.884579, -75.821508, -75.758437, ..., -67.879134, -67.816286,
         -67.753442],
@@ -1205,7 +1219,32 @@ Attributes:
        [-79.542336, -79.47909 , -79.415844, ..., -71.510168, -71.446923,
         -71.383677],
        [-79.588635, -79.525386, -79.462137, ..., -71.556099, -71.492851,
-        -71.429602]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-8251a025-a7f3-43f2-9c39-4c18128ee7b8' class='xr-section-summary-in' type='checkbox'  checked><label for='section-8251a025-a7f3-43f2-9c39-4c18128ee7b8' class='xr-section-summary' >Attributes: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>Celsius</dd><dt><span>long_name :</span></dt><dd>potential temperature</dd><dt><span>time :</span></dt><dd>ocean_time</dd><dt><span>field :</span></dt><dd>temperature, scalar, series</dd><dt><span>_ChunkSizes :</span></dt><dd>[  1  36  82 130]</dd><dt><span>standard_name :</span></dt><dd>sea_water_potential_temperature</dd></dl></div></li></ul></div></div></div></div>
+        -71.429602]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-44427e13-855d-4e6e-bbdd-d22daa3ebe96' class='xr-section-summary-in' type='checkbox'  ><label for='section-44427e13-855d-4e6e-bbdd-d22daa3ebe96' class='xr-section-summary' >Indexes: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>s_rho</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-05fc9df6-3ed7-4e36-aade-9e0b716d6bed' class='xr-index-data-in' type='checkbox'/><label for='index-05fc9df6-3ed7-4e36-aade-9e0b716d6bed' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Float64Index([   -0.986111111111111,   -0.9583333333333333,
+                -0.9305555555555555,   -0.9027777777777777,
+                             -0.875,   -0.8472222222222222,
+                -0.8194444444444444,   -0.7916666666666666,
+                -0.7638888888888888,    -0.736111111111111,
+                -0.7083333333333333,   -0.6805555555555555,
+                -0.6527777777777778,                -0.625,
+                -0.5972222222222222,   -0.5694444444444444,
+                -0.5416666666666666,   -0.5138888888888888,
+                -0.4861111111111111,   -0.4583333333333333,
+                -0.4305555555555555,  -0.40277777777777773,
+                             -0.375,   -0.3472222222222222,
+                -0.3194444444444444,  -0.29166666666666663,
+                -0.2638888888888889,   -0.2361111111111111,
+               -0.20833333333333331,  -0.18055555555555555,
+               -0.15277777777777776,                -0.125,
+               -0.09722222222222221,  -0.06944444444444445,
+              -0.041666666666666664, -0.013888888888888888],
+             dtype=&#x27;float64&#x27;, name=&#x27;s_rho&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>run</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-055af303-3163-4487-ae66-46f3dbca0e3d' class='xr-index-data-in' type='checkbox'/><label for='index-055af303-3163-4487-ae66-46f3dbca0e3d' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(DatetimeIndex([&#x27;2013-05-18&#x27;, &#x27;2013-05-19&#x27;, &#x27;2013-05-20&#x27;, &#x27;2013-05-21&#x27;,
+               &#x27;2013-05-22&#x27;, &#x27;2013-05-23&#x27;, &#x27;2013-05-24&#x27;, &#x27;2013-05-25&#x27;,
+               &#x27;2013-05-26&#x27;, &#x27;2013-05-27&#x27;,
+               ...
+               &#x27;2018-09-05&#x27;, &#x27;2018-09-06&#x27;, &#x27;2018-09-07&#x27;, &#x27;2018-09-08&#x27;,
+               &#x27;2018-09-09&#x27;, &#x27;2018-09-10&#x27;, &#x27;2018-09-11&#x27;, &#x27;2018-09-12&#x27;,
+               &#x27;2018-09-13&#x27;, &#x27;2018-09-14&#x27;],
+              dtype=&#x27;datetime64[ns]&#x27;, name=&#x27;run&#x27;, length=1929, freq=None))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a6d2faf1-1aa1-42ee-8726-a38fbcadc2df' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a6d2faf1-1aa1-42ee-8726-a38fbcadc2df' class='xr-section-summary' >Attributes: <span>(6)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>units :</span></dt><dd>Celsius</dd><dt><span>long_name :</span></dt><dd>potential temperature</dd><dt><span>time :</span></dt><dd>ocean_time</dd><dt><span>field :</span></dt><dd>temperature, scalar, series</dd><dt><span>_ChunkSizes :</span></dt><dd>[  1  36  82 130]</dd><dt><span>standard_name :</span></dt><dd>sea_water_potential_temperature</dd></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1318,7 +1357,7 @@ The specs are detailed in <a class="reference external" href="https://sgrid.gith
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pysgrid</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://geoport.whoi.edu/thredds/dodsC/coawst_4/use/fmrc/coawst_4_use_best.ncd&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://geoport.whoi.edu/thredds/dodsC/coawst_4/use/fmrc/coawst_4_use_best.ncd&quot;</span>
 <span class="n">sgrid</span> <span class="o">=</span> <span class="n">pysgrid</span><span class="o">.</span><span class="n">load_grid</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1402,7 +1441,7 @@ There is plenty of room to create convenience methods using the low level access
 <span class="n">v_velocity</span> <span class="o">=</span> <span class="n">nc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">v_var</span><span class="o">.</span><span class="n">variable</span><span class="p">]</span>
 
 <span class="n">v_idx</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># surface</span>
-<span class="n">time_idx</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># Last time step.</span>
+<span class="n">time_idx</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># First time step.</span>
 
 <span class="n">u</span> <span class="o">=</span> <span class="n">u_velocity</span><span class="p">[</span><span class="n">time_idx</span><span class="p">,</span> <span class="n">v_idx</span><span class="p">,</span> <span class="n">u_var</span><span class="o">.</span><span class="n">center_slicing</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">u_var</span><span class="o">.</span><span class="n">center_slicing</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
 <span class="n">v</span> <span class="o">=</span> <span class="n">v_velocity</span><span class="p">[</span><span class="n">time_idx</span><span class="p">,</span> <span class="n">v_idx</span><span class="p">,</span> <span class="n">v_var</span><span class="o">.</span><span class="n">center_slicing</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">v_var</span><span class="o">.</span><span class="n">center_slicing</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>

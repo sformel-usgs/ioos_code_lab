@@ -21,7 +21,7 @@
     href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -640,298 +640,6 @@ title="Print to PDF"
 <p>Created: 2020-02-14</p>
 <p>Updated: 2022-05-23</p>
 <p>This post will demonstrate how to <a class="reference external" href="https://github.com/ioos/ioos_qc">run <code class="docutils literal notranslate"><span class="pre">ioos_qc</span></code></a> on a time-series dataset. <code class="docutils literal notranslate"><span class="pre">ioos_qc</span></code> implements the <a class="reference external" href="https://ioos.noaa.gov/project/qartod/">Quality Assurance / Quality Control of Real Time Oceanographic Data (QARTOD)</a>.</p>
-<p>We will <a class="reference external" href="https://docs.bokeh.org/en/latest/">use <code class="docutils literal notranslate"><span class="pre">bokeh</span></code></a> for interactive plots, so let’s start by loading the interactive notebook output.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">output_notebook</span>
-<span class="n">output_notebook</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div class="bk-root">
-        <a href="https://bokeh.org" target="_blank" class="bk-logo bk-logo-small bk-logo-notebook"></a>
-        <span id="1002">Loading BokehJS ...</span>
-    </div>
-</div><script type="application/javascript">(function(root) {
-  function now() {
-    return new Date();
-  }
-
-  const force = true;
-
-  if (typeof root._bokeh_onload_callbacks === "undefined" || force === true) {
-    root._bokeh_onload_callbacks = [];
-    root._bokeh_is_loading = undefined;
-  }
-
-const JS_MIME_TYPE = 'application/javascript';
-  const HTML_MIME_TYPE = 'text/html';
-  const EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
-  const CLASS_NAME = 'output_bokeh rendered_html';
-
-  /**
-   * Render data to the DOM node
-   */
-  function render(props, node) {
-    const script = document.createElement("script");
-    node.appendChild(script);
-  }
-
-  /**
-   * Handle when an output is cleared or removed
-   */
-  function handleClearOutput(event, handle) {
-    const cell = handle.cell;
-
-    const id = cell.output_area._bokeh_element_id;
-    const server_id = cell.output_area._bokeh_server_id;
-    // Clean up Bokeh references
-    if (id != null && id in Bokeh.index) {
-      Bokeh.index[id].model.document.clear();
-      delete Bokeh.index[id];
-    }
-
-    if (server_id !== undefined) {
-      // Clean up Bokeh references
-      const cmd_clean = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
-      cell.notebook.kernel.execute(cmd_clean, {
-        iopub: {
-          output: function(msg) {
-            const id = msg.content.text.trim();
-            if (id in Bokeh.index) {
-              Bokeh.index[id].model.document.clear();
-              delete Bokeh.index[id];
-            }
-          }
-        }
-      });
-      // Destroy server and session
-      const cmd_destroy = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
-      cell.notebook.kernel.execute(cmd_destroy);
-    }
-  }
-
-  /**
-   * Handle when a new output is added
-   */
-  function handleAddOutput(event, handle) {
-    const output_area = handle.output_area;
-    const output = handle.output;
-
-    // limit handleAddOutput to display_data with EXEC_MIME_TYPE content only
-    if ((output.output_type != "display_data") || (!Object.prototype.hasOwnProperty.call(output.data, EXEC_MIME_TYPE))) {
-      return
-    }
-
-    const toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
-
-    if (output.metadata[EXEC_MIME_TYPE]["id"] !== undefined) {
-      toinsert[toinsert.length - 1].firstChild.textContent = output.data[JS_MIME_TYPE];
-      // store reference to embed id on output_area
-      output_area._bokeh_element_id = output.metadata[EXEC_MIME_TYPE]["id"];
-    }
-    if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
-      const bk_div = document.createElement("div");
-      bk_div.innerHTML = output.data[HTML_MIME_TYPE];
-      const script_attrs = bk_div.children[0].attributes;
-      for (let i = 0; i < script_attrs.length; i++) {
-        toinsert[toinsert.length - 1].firstChild.setAttribute(script_attrs[i].name, script_attrs[i].value);
-        toinsert[toinsert.length - 1].firstChild.textContent = bk_div.children[0].textContent
-      }
-      // store reference to server id on output_area
-      output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
-    }
-  }
-
-  function register_renderer(events, OutputArea) {
-
-    function append_mime(data, metadata, element) {
-      // create a DOM node to render to
-      const toinsert = this.create_output_subarea(
-        metadata,
-        CLASS_NAME,
-        EXEC_MIME_TYPE
-      );
-      this.keyboard_manager.register_events(toinsert);
-      // Render to node
-      const props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
-      render(props, toinsert[toinsert.length - 1]);
-      element.append(toinsert);
-      return toinsert
-    }
-
-    /* Handle when an output is cleared or removed */
-    events.on('clear_output.CodeCell', handleClearOutput);
-    events.on('delete.Cell', handleClearOutput);
-
-    /* Handle when a new output is added */
-    events.on('output_added.OutputArea', handleAddOutput);
-
-    /**
-     * Register the mime type and append_mime function with output_area
-     */
-    OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
-      /* Is output safe? */
-      safe: true,
-      /* Index of renderer in `output_area.display_order` */
-      index: 0
-    });
-  }
-
-  // register the mime type if in Jupyter Notebook environment and previously unregistered
-  if (root.Jupyter !== undefined) {
-    const events = require('base/js/events');
-    const OutputArea = require('notebook/js/outputarea').OutputArea;
-
-    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
-      register_renderer(events, OutputArea);
-    }
-  }
-  if (typeof (root._bokeh_timeout) === "undefined" || force === true) {
-    root._bokeh_timeout = Date.now() + 5000;
-    root._bokeh_failed_load = false;
-  }
-
-  const NB_LOAD_WARNING = {'data': {'text/html':
-     "<div style='background-color: #fdd'>\n"+
-     "<p>\n"+
-     "BokehJS does not appear to have successfully loaded. If loading BokehJS from CDN, this \n"+
-     "may be due to a slow or bad network connection. Possible fixes:\n"+
-     "</p>\n"+
-     "<ul>\n"+
-     "<li>re-rerun `output_notebook()` to attempt to load from CDN again, or</li>\n"+
-     "<li>use INLINE resources instead, as so:</li>\n"+
-     "</ul>\n"+
-     "<code>\n"+
-     "from bokeh.resources import INLINE\n"+
-     "output_notebook(resources=INLINE)\n"+
-     "</code>\n"+
-     "</div>"}};
-
-  function display_loaded() {
-    const el = document.getElementById("1002");
-    if (el != null) {
-      el.textContent = "BokehJS is loading...";
-    }
-    if (root.Bokeh !== undefined) {
-      if (el != null) {
-        el.textContent = "BokehJS " + root.Bokeh.version + " successfully loaded.";
-      }
-    } else if (Date.now() < root._bokeh_timeout) {
-      setTimeout(display_loaded, 100)
-    }
-  }
-
-  function run_callbacks() {
-    try {
-      root._bokeh_onload_callbacks.forEach(function(callback) {
-        if (callback != null)
-          callback();
-      });
-    } finally {
-      delete root._bokeh_onload_callbacks
-    }
-    console.debug("Bokeh: all callbacks have finished");
-  }
-
-  function load_libs(css_urls, js_urls, callback) {
-    if (css_urls == null) css_urls = [];
-    if (js_urls == null) js_urls = [];
-
-    root._bokeh_onload_callbacks.push(callback);
-    if (root._bokeh_is_loading > 0) {
-      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
-      return null;
-    }
-    if (js_urls == null || js_urls.length === 0) {
-      run_callbacks();
-      return null;
-    }
-    console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
-    root._bokeh_is_loading = css_urls.length + js_urls.length;
-
-    function on_load() {
-      root._bokeh_is_loading--;
-      if (root._bokeh_is_loading === 0) {
-        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
-        run_callbacks()
-      }
-    }
-
-    function on_error(url) {
-      console.error("failed to load " + url);
-    }
-
-    for (let i = 0; i < css_urls.length; i++) {
-      const url = css_urls[i];
-      const element = document.createElement("link");
-      element.onload = on_load;
-      element.onerror = on_error.bind(null, url);
-      element.rel = "stylesheet";
-      element.type = "text/css";
-      element.href = url;
-      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
-      document.body.appendChild(element);
-    }
-
-    for (let i = 0; i < js_urls.length; i++) {
-      const url = js_urls[i];
-      const element = document.createElement('script');
-      element.onload = on_load;
-      element.onerror = on_error.bind(null, url);
-      element.async = false;
-      element.src = url;
-      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
-      document.head.appendChild(element);
-    }
-  };
-
-  function inject_raw_css(css) {
-    const element = document.createElement("style");
-    element.appendChild(document.createTextNode(css));
-    document.body.appendChild(element);
-  }
-
-  const js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-2.4.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.3.min.js"];
-  const css_urls = [];
-
-  const inline_js = [    function(Bokeh) {
-      Bokeh.set_log_level("info");
-    },
-function(Bokeh) {
-    }
-  ];
-
-  function run_inline_js() {
-    if (root.Bokeh !== undefined || force === true) {
-          for (let i = 0; i < inline_js.length; i++) {
-      inline_js[i].call(root, root.Bokeh);
-    }
-if (force === true) {
-        display_loaded();
-      }} else if (Date.now() < root._bokeh_timeout) {
-      setTimeout(run_inline_js, 100);
-    } else if (!root._bokeh_failed_load) {
-      console.log("Bokeh: BokehJS failed to load within specified timeout.");
-      root._bokeh_failed_load = true;
-    } else if (force !== true) {
-      const cell = $(document.getElementById("1002")).parents('.cell').data().cell;
-      cell.output_area.append_execute_result(NB_LOAD_WARNING)
-    }
-  }
-
-  if (root._bokeh_is_loading === 0) {
-    console.debug("Bokeh: BokehJS loaded, going straight to plotting");
-    run_inline_js();
-  } else {
-    load_libs(css_urls, js_urls, function() {
-      console.debug("Bokeh: BokehJS plotting callback run at", now());
-      run_inline_js();
-    });
-  }
-}(window));</script></div>
-</div>
 <p>We will be using the water level data from a <a class="reference external" href="https://www.google.com/maps?q=66.895035,-162.566752">fixed station in Kotzebue, AK</a>.</p>
 <p>Below we create a simple Quality Assurance/Quality Control (QA/QC) configuration that will be used as input for <code class="docutils literal notranslate"><span class="pre">ioos_qc</span></code>. All the interval values are in the same units as the data.</p>
 <p>For more information on the tests and recommended values for QA/QC check the documentation of each test and its inputs:
@@ -984,11 +692,9 @@ if (force === true) {
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filipe/miniforge3/envs/IOOS/lib/python3.10/site-packages/xarray/conventions.py:516: SerializationWarning: variable &#39;sea_surface_height_above_sea_level_geoid_mhhw_qc_agg&#39; has multiple fill values {-127, 4294967169}, decoding all values to NaN.
-  new_vars[k] = decode_cf_variable(
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coordinates:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- CF Roles:   timeseries_id: [&#39;station&#39;]
+
+Coordinates:
 - CF Axes:   X: [&#39;longitude&#39;]
              Y: [&#39;latitude&#39;]
              T: [&#39;time&#39;]
@@ -1032,7 +738,7 @@ Data Variables:
 
 <span class="n">qc_results</span> <span class="o">=</span>  <span class="n">qc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
     <span class="n">inp</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">variable_name</span><span class="p">],</span>
-    <span class="n">tinp</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">],</span>
+    <span class="n">tinp</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">cf</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
 <span class="p">)</span>
 
 <span class="n">qc_results</span>
@@ -1040,13 +746,18 @@ Data Variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>defaultdict(collections.OrderedDict,
-            {&#39;qartod&#39;: OrderedDict([(&#39;gross_range_test&#39;,
-                           array([1, 1, 1, ..., 1, 1, 1], dtype=uint8)),
-                          (&#39;flat_line_test&#39;,
-                           array([1, 1, 1, ..., 1, 1, 1], dtype=uint8)),
-                          (&#39;spike_test&#39;,
-                           array([2, 1, 1, ..., 1, 1, 2], dtype=uint8))])})
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OrderedDict([(&#39;qartod&#39;,
+              OrderedDict([(&#39;gross_range_test&#39;,
+                            masked_array(data=[1, 1, 1, ..., 1, 1, 1],
+                                         mask=False,
+                                   fill_value=999999,
+                                        dtype=uint8)),
+                           (&#39;flat_line_test&#39;, array([1, 1, 1, ..., 1, 1, 1])),
+                           (&#39;spike_test&#39;,
+                            masked_array(data=[2, 1, 1, ..., 1, 1, 2],
+                                         mask=False,
+                                   fill_value=999999,
+                                        dtype=uint8))]))])
 </pre></div>
 </div>
 </div>
@@ -1106,13 +817,13 @@ Data Variables:
     <span class="n">variable_name</span><span class="p">,</span>
     <span class="n">qc_results</span><span class="p">,</span>
     <span class="n">title</span><span class="p">,</span>
-    <span class="s2">&quot;gross_range_test&quot;</span>
+    <span class="s2">&quot;gross_range_test&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/2020-02-14-QARTOD_ioos_qc_Water-Level-Example_10_0.png" src="../../../_images/2020-02-14-QARTOD_ioos_qc_Water-Level-Example_10_0.png" />
+<img alt="../../../_images/2020-02-14-QARTOD_ioos_qc_Water-Level-Example_8_0.png" src="../../../_images/2020-02-14-QARTOD_ioos_qc_Water-Level-Example_8_0.png" />
 </div>
 </div>
 <p>An actual spike test, based on a data increase threshold, flags similar spikes to the gross range test but also indetifies other suspect unusual increases in the series.</p>
@@ -1123,13 +834,13 @@ Data Variables:
     <span class="n">variable_name</span><span class="p">,</span>
     <span class="n">qc_results</span><span class="p">,</span>
     <span class="n">title</span><span class="p">,</span>
-    <span class="s2">&quot;spike_test&quot;</span>
+    <span class="s2">&quot;spike_test&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/2020-02-14-QARTOD_ioos_qc_Water-Level-Example_12_0.png" src="../../../_images/2020-02-14-QARTOD_ioos_qc_Water-Level-Example_12_0.png" />
+<img alt="../../../_images/2020-02-14-QARTOD_ioos_qc_Water-Level-Example_10_0.png" src="../../../_images/2020-02-14-QARTOD_ioos_qc_Water-Level-Example_10_0.png" />
 </div>
 </div>
 <p>The flat line test identifies issues with the data where values are “stuck.”</p>
@@ -1141,13 +852,13 @@ Data Variables:
     <span class="n">variable_name</span><span class="p">,</span>
     <span class="n">qc_results</span><span class="p">,</span>
     <span class="n">title</span><span class="p">,</span>
-    <span class="s2">&quot;flat_line_test&quot;</span>
+    <span class="s2">&quot;flat_line_test&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/2020-02-14-QARTOD_ioos_qc_Water-Level-Example_14_0.png" src="../../../_images/2020-02-14-QARTOD_ioos_qc_Water-Level-Example_14_0.png" />
+<img alt="../../../_images/2020-02-14-QARTOD_ioos_qc_Water-Level-Example_12_0.png" src="../../../_images/2020-02-14-QARTOD_ioos_qc_Water-Level-Example_12_0.png" />
 </div>
 </div>
 <p>This notebook was adapt from Jessica Austin and Kyle Wilcox’s <a class="reference external" href="https://github.com/ioos/ioos_qc/blob/b34b3762d659362fb3af11f52d8905d18cd6ec7b/docs/source/examples/QartodTestExample_WaterLevel.ipynb">original ioos_qc examples</a>. Please <a class="reference external" href="https://ioos.github.io/ioos_qc/">see the <code class="docutils literal notranslate"><span class="pre">ioos_qc</span></code> documentation</a> for more examples.</p>

@@ -21,7 +21,7 @@
     href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -636,113 +636,201 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="read-realtime-data-from-ioos-sensor-map-via-erddap-tabledap">
 <h1>Read realtime data from IOOS Sensor Map via ERDDAP tabledap<a class="headerlink" href="#read-realtime-data-from-ioos-sensor-map-via-erddap-tabledap" title="Permalink to this headline">#</a></h1>
 <p>Created: 2017-03-21</p>
-<div class="alert alert-danger">
-  <strong>This notebook is stale and won't run due to missing data upstream and changes in the libraries used.</strong>
-</div><p>Web Map Services are a great way to find data you may be looking for in a particular geographic area.</p>
-<p>Suppose you were exploring the <a class="reference external" href="https://via.hypothes.is/https://sensors.ioos.us/#map">IOOS Sensor Map</a>,
-and after selecting Significant Wave Height,
-had selected buoy 44011 on George’s Bank:</p>
-<p><img alt="2017-03-27_16-21-08" src="https://cloud.githubusercontent.com/assets/1872600/24376518/213e6c4c-130a-11e7-9744-2f23e9660adf.png" /></p>
-<p>You click the <code class="docutils literal notranslate"><span class="pre">ERDDAP</span></code> link and generate a URL to download the data as <code class="docutils literal notranslate"><span class="pre">CSV</span></code> <img alt="2017-03-27_16-24-35" src="https://cloud.githubusercontent.com/assets/1872600/24376521/2377afc8-130a-11e7-9a3b-c1c46e43d20d.png" />.</p>
-<p>You notice that the URL that is generated</p>
-<p><a class="reference external" href="https://erddap.axiomdatascience.com/erddap/tabledap/sensor_service.csvp%3Ftime%2Cdepth%2Cstation%2Cparameter%2Cunit%2Cvalue%26time%3E%3D2017-02-27T12%3A00%3A00Z%26station%3D%22urn%3Aioos%3Astation%3Awmo%3A44011%22%26parameter%3D%22Significant%20Wave%20Height%22%26unit%3D%22m%22">https://erddap.axiomdatascience.com/erddap/tabledap/sensor_service.csvp?time,depth,station,parameter,unit,value&amp;time&gt;=2017-02-27T12:00:00Z&amp;station=“urn:ioos:station:wmo:44011”&amp;parameter=“Significant Wave Height”&amp;unit=“m”</a></p>
-<p>is fairly easy to understand,
-and that a program could construct that URL fairly easily.
-Let’s explore how that could work…</p>
+<p>Updated: 2022-07-07</p>
+<p>Web Map Services are a great way to find data you may be looking for in a particular geographic area.</p>
+<p>Suppose you are exploring the <a class="reference external" href="https://sensors.ioos.us/#map">IOOS Sensor Map</a>,
+you select Oxygen and click on the only returned value, the Moss Landing Marine Laboratories (MLML) station.</p>
+<p><img alt="sensor_map.png" src="https://user-images.githubusercontent.com/950575/178321765-74ed0562-b942-4d97-af8b-85158bc6488c.png" /></p>
+<p>One can download the data in multiple forms from the site, including generating an <a class="reference external" href="https://erddap.sensors.ioos.us/erddap/tabledap/mlml_mlml_sea.csv?time%2Cmole_concentration_of_dissolved_molecular_oxygen_in_sea_water%2Cmole_concentration_of_dissolved_molecular_oxygen_in_sea_water_qc_agg%2Cz&amp;time%3E%3D2022-07-01T12%3A35%3A13Z&amp;time%3C%3D2022-07-11T12%3A35%3A13Z">ERDDAP URL</a> for the request.</p>
+<p>These features makes Sensor map an extremely useful tool for quick data explorations but now imagine if you want automate that instead of exploring the Sensor Map interactively? Or if you want to make multiple small modification to your query? It would be very tedious and error prone to try that with the Sensor Map interface. The good news is that we cab automate that by querying the ERDDAP server directly.</p>
+<p>First we need to instantiate a server object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlencode</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">urlencode</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">erddapy</span> <span class="kn">import</span> <span class="n">ERDDAP</span>
 
 
-<span class="k">def</span> <span class="nf">encode_erddap</span><span class="p">(</span><span class="n">urlbase</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    urlbase: the base string for the endpoint</span>
-<span class="sd">             (e.g.: https://erddap.axiomdatascience.com/erddap/tabledap).</span>
-<span class="sd">    fname: the data source (e.g.: `sensor_service`) and the response (e.g.: `.csvp` for CSV).</span>
-<span class="sd">    columns: the columns of the return table.</span>
-<span class="sd">    params: the parameters for the query.</span>
-
-<span class="sd">    Returns a valid ERDDAP endpoint.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">urlbase</span> <span class="o">=</span> <span class="n">urlbase</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">urlbase</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s2">&quot;http:&quot;</span><span class="p">,</span> <span class="s2">&quot;https:&quot;</span><span class="p">)):</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Expected valid URL but got </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">(</span><span class="n">urlbase</span><span class="p">))</span>
-
-    <span class="n">columns</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="n">urlencode</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-    <span class="n">endpoint</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{urlbase}</span><span class="s2">/</span><span class="si">{fname}</span><span class="s2">?</span><span class="si">{columns}</span><span class="s2">&amp;</span><span class="si">{params}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span>
-
-    <span class="n">url</span> <span class="o">=</span> <span class="n">endpoint</span><span class="p">(</span><span class="n">urlbase</span><span class="o">=</span><span class="n">urlbase</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="n">fname</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">r</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">url</span>
+<span class="n">server</span> <span class="o">=</span> <span class="s2">&quot;http://erddap.sensors.ioos.us/erddap&quot;</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">ERDDAP</span><span class="p">(</span><span class="n">server</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="s2">&quot;tabledap&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Using the function we defined above, we can now bypass the forms and get the data by generating the URL “by hand”. Below we have a query for <code class="docutils literal notranslate"><span class="pre">Significant</span> <span class="pre">Wave</span> <span class="pre">Height</span></code> from buoy <code class="docutils literal notranslate"><span class="pre">44011</span></code>, a buoy on George’s Bank off the coast of Cape Cod, MA, starting at the beginning of the year 2017.</p>
-<p>* For more information on how to use tabledap, please check the <a class="reference external" href="https://via.hypothes.is/http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html">NOAA ERDDAP documentation</a> for more information on the various parameters and responses of ERDDAP.</p>
+<p>Now we can search for “dissolved oxygen moss landing” and inspect the dataset_ids.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">unquote</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">urllib2</span> <span class="kn">import</span> <span class="n">unquote</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 
-<span class="n">urlbase</span> <span class="o">=</span> <span class="s2">&quot;https://erddap.axiomdatascience.com/erddap/tabledap&quot;</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_search_url</span><span class="p">(</span><span class="n">search_for</span><span class="o">=</span><span class="s2">&quot;dissolved oxygen moss landing&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>
 
-<span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;sensor_service.csvp&quot;</span>
-
-<span class="n">columns</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;time&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;value&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;station&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;parameter&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;unit&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;depth&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># Inequalities do not exist in HTTP parameters,</span>
-    <span class="c1"># so we need to hardcode the `&gt;` in the time key to get a &#39;&gt;=&#39;.</span>
-    <span class="c1"># Note that a &#39;&gt;&#39; or &#39;&lt;&#39; cannot be encoded with `urlencode`, only `&gt;=` and `&lt;=`.</span>
-    <span class="s2">&quot;time&gt;&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-01-00T00:00:00Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;station&quot;</span><span class="p">:</span> <span class="s1">&#39;&quot;urn:ioos:station:wmo:44011&quot;&#39;</span><span class="p">,</span>
-    <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s1">&#39;&quot;Significant Wave Height&quot;&#39;</span><span class="p">,</span>
-    <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s1">&#39;&quot;m&quot;&#39;</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="n">encode_erddap</span><span class="p">(</span><span class="n">urlbase</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">unquote</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">df</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://erddap.axiomdatascience.com/erddap/tabledap/sensor_service.csvp?time,value,station,longitude,latitude,parameter,unit,depth&amp;time&gt;=2017-01-00T00:00:00Z&amp;station=&quot;urn:ioos:station:wmo:44011&quot;&amp;parameter=&quot;Significant+Wave+Height&quot;&amp;unit=&quot;m&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>http://erddap.sensors.ioos.us/erddap/search/advanced.csv?page=1&amp;itemsPerPage=1000&amp;protocol=tabledap&amp;cdm_data_type=(ANY)&amp;institution=(ANY)&amp;ioos_category=(ANY)&amp;keywords=(ANY)&amp;long_name=(ANY)&amp;standard_name=(ANY)&amp;variableName=(ANY)&amp;minLon=(ANY)&amp;maxLon=(ANY)&amp;minLat=(ANY)&amp;maxLat=(ANY)&amp;minTime=&amp;maxTime=&amp;searchFor=dissolved+oxygen+moss+landing
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>griddap</th>
+      <th>Subset</th>
+      <th>tabledap</th>
+      <th>Make A Graph</th>
+      <th>wms</th>
+      <th>files</th>
+      <th>Title</th>
+      <th>Summary</th>
+      <th>FGDC</th>
+      <th>ISO 19115</th>
+      <th>Info</th>
+      <th>Background Info</th>
+      <th>RSS</th>
+      <th>Email</th>
+      <th>Institution</th>
+      <th>Dataset ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>http://erddap.sensors.ioos.us/erddap/tabledap/...</td>
+      <td>http://erddap.sensors.ioos.us/erddap/tabledap/...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>CeNCOOS in situ water quality monitoring using...</td>
+      <td>The Seawater intake station is maintained by M...</td>
+      <td>http://erddap.sensors.ioos.us/erddap/metadata/...</td>
+      <td>http://erddap.sensors.ioos.us/erddap/metadata/...</td>
+      <td>http://erddap.sensors.ioos.us/erddap/info/mlml...</td>
+      <td>https://sensors.ioos.us/#metadata/48035/station</td>
+      <td>http://erddap.sensors.ioos.us/erddap/rss/mlml_...</td>
+      <td>http://erddap.sensors.ioos.us/erddap/subscript...</td>
+      <td>Moss Landing Marine Laboratory</td>
+      <td>mlml_mlml_sea</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>http://erddap.sensors.ioos.us/erddap/tabledap/...</td>
+      <td>http://erddap.sensors.ioos.us/erddap/tabledap/...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>CeNCOOS in situ water quality monitoring at Mo...</td>
+      <td>The Monterey shore station is maintained by Mo...</td>
+      <td>http://erddap.sensors.ioos.us/erddap/metadata/...</td>
+      <td>http://erddap.sensors.ioos.us/erddap/metadata/...</td>
+      <td>http://erddap.sensors.ioos.us/erddap/info/mlml...</td>
+      <td>https://sensors.ioos.us/#metadata/20362/station</td>
+      <td>http://erddap.sensors.ioos.us/erddap/rss/mlml_...</td>
+      <td>http://erddap.sensors.ioos.us/erddap/subscript...</td>
+      <td>Moss Landing Marine Laboratory</td>
+      <td>mlml_monterey</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Interesting, we found two dataset_ids instead of the one showed in the sensor map!
+Let’s investigate the datasets we found and try to figure out why there is a discrepancy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Dataset ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Title&quot;</span><span class="p">,</span> <span class="s2">&quot;Summary&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">dataset_id</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;Dataset ID&quot;</span><span class="p">]</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;Title&quot;</span><span class="p">]</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;Summary&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="se">\n\n</span><span class="si">{</span><span class="n">summary</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mlml_mlml_sea: CeNCOOS in situ water quality monitoring using the seawater input for Moss Landing Marine Laboratory.
+
+The Seawater intake station is maintained by Moss Landing Marine Laboratories who share the data with CeNCOOS. Data collected includes temperature, conductivity, salinity, fluorescence, beam attenuation, transmission, dissolved oxygen, dissolved organic saturation, pH, and tide height. Seawater data observations are collected from raw seawater drawn through an intake pipe. The pipe intake opening is located at 36.8025N and 121.7915W and is ~16.6m (54.4ft) below MLLW. The seawater sensors are cleaned of biofouling agents on a weekly/twice-weekly interval, though some data drift can be observed in transmission, beam attenution, and fluorescence. These nearshore sensors are part of the Central and Norther California Ocean Observing System (CeNCOOS). They measure various water quality parameters at fixed points along the California coast.
+
+cdm_data_type = TimeSeries
+VARIABLES:
+time (seconds since 1970-01-01T00:00:00Z)
+latitude (degrees_north)
+longitude (degrees_east)
+z (Altitude, m)
+pco2 (microatm)
+pco2_qc_agg (pCO2 QARTOD Aggregate Quality Flag)
+pco2_qc_tests (pCO2 QARTOD Individual Tests)
+sea_water_electrical_conductivity (Conductivity, mS.cm-1)
+sea_water_electrical_conductivity_qc_agg (Conductivity QARTOD Aggregate Quality Flag)
+sea_water_electrical_conductivity_qc_tests (Conductivity QARTOD Individual Tests)
+fluorescence (microg.L-1)
+fluorescence_qc_agg (Fluorescence QARTOD Aggregate Quality Flag)
+fluorescence_qc_tests (Fluorescence QARTOD Individual Tests)
+mole_concentration_of_nitrate_in_sea_water (Nitrate Concentration, micromol.L-1)
+mole_concentration_of_nitrate_in_sea_water_qc_agg (Nitrate Concentration QARTOD Aggregate Quality Flag)
+mole_concentration_of_nitrate_in_sea_water_qc_tests (Nitrate Concentration QARTOD Individual Tests)
+mole_concentration_of_dissolved_molecular_oxygen_in_sea_water (Dissolved Oxygen Molecular Concentration, micromol.L-1)
+mole_concentration_of_dissolved_molecular_oxygen_in_sea_water_qc_agg (Dissolved Oxygen Molecular Concentration QARTOD Aggregate Quality Flag)
+mole_concentration_of_dissolved_molecular_oxygen_in_sea_water_qc_tests (Dissolved Oxygen Molecular Concentration QARTOD Individual Tests)
+... (22 more variables)
+
+
+mlml_monterey: CeNCOOS in situ water quality monitoring at Monterey Bay Commercial Wharf.
+
+The Monterey shore station is maintained by Moss Landing Marine Labs. The station has been operational since 2012 and consists of in water sensors that are fixed to a pier sampling every 15 minutes. These sensors provide near-real time observations of ocean water salinity, temperature, dissolved oxygen, chlorophyll fluorescence, turbidity and pH. These sensors provide near-real time observations of ocean water conductivity, salinity, temperature, depth, dissolved oxygen, chlorophyll fluorescence, turbidity and nitrate. These nearshore sensors are part of the Central and Norther California Ocean Observing System (CeNCOOS). They measure various water quality parameters at fixed points along the California coast.
+
+cdm_data_type = TimeSeries
+VARIABLES:
+time (seconds since 1970-01-01T00:00:00Z)
+latitude (degrees_north)
+longitude (degrees_east)
+z (Altitude, m)
+mass_concentration_of_chlorophyll_in_sea_water (Chlorophyll, microg.L-1)
+mass_concentration_of_chlorophyll_in_sea_water_qc_agg (Chlorophyll QARTOD Aggregate Quality Flag)
+mass_concentration_of_chlorophyll_in_sea_water_qc_tests (Chlorophyll QARTOD Individual Tests)
+sea_water_electrical_conductivity (Conductivity, mS.cm-1)
+sea_water_electrical_conductivity_qc_agg (Conductivity QARTOD Aggregate Quality Flag)
+sea_water_electrical_conductivity_qc_tests (Conductivity QARTOD Individual Tests)
+mass_concentration_of_oxygen_in_sea_water (Dissolved Oxygen Concentration, mg.L-1)
+mass_concentration_of_oxygen_in_sea_water_qc_agg (Dissolved Oxygen Concentration QARTOD Aggregate Quality Flag)
+mass_concentration_of_oxygen_in_sea_water_qc_tests (Dissolved Oxygen Concentration QARTOD Individual Tests)
+sea_water_practical_salinity (Salinity, 1e-3)
+sea_water_practical_salinity_qc_agg (Salinity QARTOD Aggregate Quality Flag)
+sea_water_practical_salinity_qc_tests (Salinity QARTOD Individual Tests)
+sea_water_pressure (decibars)
+sea_water_pressure_qc_agg (Sea Water Pressure QARTOD Aggregate Quality Flag)
+sea_water_pressure_qc_tests (Sea Water Pressure QARTOD Individual Tests)
+sea_water_temperature (Water Temperature, degree_Celsius)
+... (9 more variables)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Here is a cool part about ERDDAP <code class="docutils literal notranslate"><span class="pre">tabledap</span></code> - The data <code class="docutils literal notranslate"><span class="pre">tabledap</span></code> <code class="docutils literal notranslate"><span class="pre">csvp</span></code> response can be easily read by Python’s pandas <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> function.</p>
+<p>The Sensor map returned only the dataset_id <code class="docutils literal notranslate"><span class="pre">mlml_mlml_sea</span></code> which corresponds to the CeNCOOS in situ water quality monitoring using the seawater input for Moss Landing Marine Laboratory. However, we also got the dataset_id for <code class="docutils literal notranslate"><span class="pre">mlml_monterey</span></code>, or the commercial wharf water quality monitoring.</p>
+<p>Let’s request the ERDDAP info on the latter to try to understand why it is available on the server but did not make into the Sensor Map. We usually suspect some sort of cut off due to the time coverage.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">read_csv</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_info_url</span><span class="p">(</span><span class="n">dataset_id</span><span class="o">=</span><span class="s2">&quot;mlml_monterey&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="s2">&quot;csv&quot;</span><span class="p">))</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Prevent :station: from turning into an emoji in the webpage.</span>
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;station&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">station</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
-
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Attribute Name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;time_coverage_end&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -765,292 +853,51 @@ Let’s explore how that could work…</p>
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>value</th>
-      <th>station</th>
-      <th>longitude (degrees_east)</th>
-      <th>latitude (degrees_north)</th>
-      <th>parameter</th>
-      <th>unit</th>
-      <th>depth (m)</th>
-    </tr>
-    <tr>
-      <th>time (UTC)</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Row Type</th>
+      <th>Variable Name</th>
+      <th>Attribute Name</th>
+      <th>Data Type</th>
+      <th>Value</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>2018-03-25 14:00:00+00:00</th>
-      <td>5.6</td>
-      <td>urn_ioos_station_wmo_44011</td>
-      <td>-66.619</td>
-      <td>41.098</td>
-      <td>Significant Wave Height</td>
-      <td>m</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>2018-03-25 13:50:00+00:00</th>
-      <td>5.6</td>
-      <td>urn_ioos_station_wmo_44011</td>
-      <td>-66.619</td>
-      <td>41.098</td>
-      <td>Significant Wave Height</td>
-      <td>m</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>2018-03-25 13:00:00+00:00</th>
-      <td>4.6</td>
-      <td>urn_ioos_station_wmo_44011</td>
-      <td>-66.619</td>
-      <td>41.098</td>
-      <td>Significant Wave Height</td>
-      <td>m</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>2018-03-25 12:50:00+00:00</th>
-      <td>4.6</td>
-      <td>urn_ioos_station_wmo_44011</td>
-      <td>-66.619</td>
-      <td>41.098</td>
-      <td>Significant Wave Height</td>
-      <td>m</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>2018-03-25 12:00:00+00:00</th>
-      <td>5.1</td>
-      <td>urn_ioos_station_wmo_44011</td>
-      <td>-66.619</td>
-      <td>41.098</td>
-      <td>Significant Wave Height</td>
-      <td>m</td>
-      <td>0.0</td>
+      <th>69</th>
+      <td>attribute</td>
+      <td>NC_GLOBAL</td>
+      <td>time_coverage_end</td>
+      <td>String</td>
+      <td>2019-11-29T15:45:00Z</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>With the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> we can easily plot the data.</p>
+<p>Bingo! Looks like station is no longer collecting data.
+The sensor map only shows real-time observations (past 4-hours).</p>
+<p>For the sake of simplicity let’s use only the <code class="docutils literal notranslate"><span class="pre">mlml_mlml_sea</span></code> and download the last month of data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">2.75</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;parameter&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">dataset_id</span> <span class="o">=</span> <span class="s2">&quot;mlml_mlml_sea&quot;</span>
+<span class="n">e</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="s2">&quot;mole_concentration_of_dissolved_molecular_oxygen_in_sea_water&quot;</span><span class="p">]</span>
+<span class="n">e</span><span class="o">.</span><span class="n">constraints</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;time&gt;=&quot;</span><span class="p">:</span> <span class="s2">&quot;now-30days&quot;</span><span class="p">}</span>
+    
+<span class="n">df</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">(</span><span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;time (UTC)&quot;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filipe/miniconda3/envs/IOOS/lib/python3.7/site-packages/pandas/core/sorting.py:257: FutureWarning: Converting timezone-aware DatetimeArray to timezone-naive ndarray with &#39;datetime64[ns]&#39; dtype. In the future, this will return an ndarray with &#39;object&#39; dtype where each element is a &#39;pandas.Timestamp&#39; with the correct &#39;tz&#39;.
-	To accept the future behavior, pass &#39;dtype=object&#39;.
-	To keep the old behavior, pass &#39;dtype=&quot;datetime64[ns]&quot;&#39;.
-  items = np.asanyarray(items)
-</pre></div>
-</div>
-<img alt="../../../_images/2017-03-21-ERDDAP_IOOS_Sensor_Map_8_1.png" src="../../../_images/2017-03-21-ERDDAP_IOOS_Sensor_Map_8_1.png" />
+<img alt="../../../_images/2017-03-21-ERDDAP_IOOS_Sensor_Map_9_0.png" src="../../../_images/2017-03-21-ERDDAP_IOOS_Sensor_Map_9_0.png" />
 </div>
 </div>
-<p>You may notice that slicing the time dimension on the sever side is very fast when compared with an OPeNDAP request. The downloading of the time dimension data, slice, and subsequent downloading of the actual data are all much faster.</p>
-<p>ERDDAP also allows for filtering of the variable’s values. For example, let’s get Wave Heights that are bigger than 6 meters starting from 2016.</p>
-<p>** Note how we can lazily build on top of the previous query using Python’s dictionaries.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;value&gt;&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;time&gt;&quot;</span><span class="p">:</span> <span class="s2">&quot;2016-01-00T00:00:00Z&quot;</span><span class="p">,}</span>
-<span class="p">)</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="n">encode_erddap</span><span class="p">(</span><span class="n">urlbase</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># Prevent :station: from turning into an emoji in the webpage.</span>
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;station&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">station</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
-
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>value</th>
-      <th>station</th>
-      <th>longitude (degrees_east)</th>
-      <th>latitude (degrees_north)</th>
-      <th>parameter</th>
-      <th>unit</th>
-      <th>depth (m)</th>
-    </tr>
-    <tr>
-      <th>time (UTC)</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2018-03-17 06:00:00+00:00</th>
-      <td>6.0</td>
-      <td>urn_ioos_station_wmo_44011</td>
-      <td>-66.619</td>
-      <td>41.098</td>
-      <td>Significant Wave Height</td>
-      <td>m</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>2018-03-17 05:50:00+00:00</th>
-      <td>6.0</td>
-      <td>urn_ioos_station_wmo_44011</td>
-      <td>-66.619</td>
-      <td>41.098</td>
-      <td>Significant Wave Height</td>
-      <td>m</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>2018-03-17 05:00:00+00:00</th>
-      <td>6.0</td>
-      <td>urn_ioos_station_wmo_44011</td>
-      <td>-66.619</td>
-      <td>41.098</td>
-      <td>Significant Wave Height</td>
-      <td>m</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>2018-03-17 04:50:00+00:00</th>
-      <td>6.0</td>
-      <td>urn_ioos_station_wmo_44011</td>
-      <td>-66.619</td>
-      <td>41.098</td>
-      <td>Significant Wave Height</td>
-      <td>m</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>2018-03-17 02:00:00+00:00</th>
-      <td>6.1</td>
-      <td>urn_ioos_station_wmo_44011</td>
-      <td>-66.619</td>
-      <td>41.098</td>
-      <td>Significant Wave Height</td>
-      <td>m</td>
-      <td>0.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>And now we can visualize the frequency of <code class="docutils literal notranslate"><span class="pre">Significant</span> <span class="pre">Wave</span> <span class="pre">Height</span></code> greater than 6 meters by month.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">key</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">month</span>
-
-
-<span class="n">grouped</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-
-<span class="n">ax</span> <span class="o">=</span> <span class="n">grouped</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Significant Wave Height events &gt; 6 meters&quot;</span><span class="p">)</span>
-<span class="n">m</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span>
-    <span class="p">[</span><span class="s2">&quot;Jan&quot;</span><span class="p">,</span> <span class="s2">&quot;Feb&quot;</span><span class="p">,</span> <span class="s2">&quot;Mar&quot;</span><span class="p">,</span> <span class="s2">&quot;Apr&quot;</span><span class="p">,</span> <span class="s2">&quot;May&quot;</span><span class="p">,</span> <span class="s2">&quot;Jun&quot;</span><span class="p">,</span> <span class="s2">&quot;Jul&quot;</span><span class="p">,</span> <span class="s2">&quot;Ago&quot;</span><span class="p">,</span> <span class="s2">&quot;Sep&quot;</span><span class="p">,</span> <span class="s2">&quot;Oct&quot;</span><span class="p">,</span> <span class="s2">&quot;Nov&quot;</span><span class="p">,</span> <span class="s2">&quot;Dec&quot;</span><span class="p">]</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../../_images/2017-03-21-ERDDAP_IOOS_Sensor_Map_12_0.png" src="../../../_images/2017-03-21-ERDDAP_IOOS_Sensor_Map_12_0.png" />
-</div>
-</div>
-<p>Wow! Wintertime is pretty rough out on George’s Bank!</p>
-<p>There is also a built-in relative time functionality so you can specify a specific time frame you look at. Here we demonstrate this part of the tool by getting the last 2 hours and displaying that with the <code class="docutils literal notranslate"><span class="pre">HTML</span></code> response in an <code class="docutils literal notranslate"><span class="pre">IFrame</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
-
-<span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;sensor_service.htmlTable&quot;</span>
-
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;time&gt;&quot;</span><span class="p">:</span> <span class="s2">&quot;now-2hours&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;time&lt;&quot;</span><span class="p">:</span> <span class="s2">&quot;now&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;station&quot;</span><span class="p">:</span> <span class="s1">&#39;&quot;urn:ioos:station:nerrs:wqbchmet&quot;&#39;</span><span class="p">,</span>
-    <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s1">&#39;&quot;Wind Speed&quot;&#39;</span><span class="p">,</span>
-    <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s1">&#39;&quot;m.s-1&quot;&#39;</span><span class="p">,</span>
-<span class="p">}</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="n">encode_erddap</span><span class="p">(</span><span class="n">urlbase</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-
-<span class="n">iframe</span> <span class="o">=</span> <span class="s1">&#39;&lt;iframe src=&quot;</span><span class="si">{src}</span><span class="s1">&quot; width=&quot;650&quot; height=&quot;370&quot;&gt;&lt;/iframe&gt;&#39;</span><span class="o">.</span><span class="n">format</span>
-<span class="n">HTML</span><span class="p">(</span><span class="n">iframe</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">url</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/filipe/miniconda3/envs/IOOS/lib/python3.7/site-packages/IPython/core/display.py:689: UserWarning: Consider using IPython.display.IFrame instead
-  warnings.warn(&quot;Consider using IPython.display.IFrame instead&quot;)
-</pre></div>
-</div>
-<div class="output text_html"><iframe src="https://erddap.axiomdatascience.com/erddap/tabledap/sensor_service.htmlTable?time,value,station,longitude,latitude,parameter,unit,depth&time%3E=now-2hours&time%3C=now&station=%22urn%3Aioos%3Astation%3Anerrs%3Awqbchmet%22&parameter=%22Wind+Speed%22&unit=%22m.s-1%22" width="650" height="370"></iframe></div></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">ERDDAP</span></code> responses are very rich. There are even multiple image formats in the automate graph responses.
-Here is how to get a <code class="docutils literal notranslate"><span class="pre">.png</span></code> file for the temperature time-series. While you can specify the width and height, we chose just an arbitrary size.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;sensor_service.png&quot;</span>
-
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;time&gt;&quot;</span><span class="p">:</span> <span class="s2">&quot;now-7days&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;station&quot;</span><span class="p">:</span> <span class="s1">&#39;&quot;urn:ioos:station:nerrs:wqbchmet&quot;&#39;</span><span class="p">,</span>
-    <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="s1">&#39;&quot;Wind Speed&quot;&#39;</span><span class="p">,</span>
-    <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s1">&#39;&quot;m.s-1&quot;&#39;</span><span class="p">,</span>
-<span class="p">}</span>
-
-
-<span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">500</span>
-<span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;.size&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">|</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)})</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="n">encode_erddap</span><span class="p">(</span><span class="n">urlbase</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-
-<span class="n">iframe</span> <span class="o">=</span> <span class="s1">&#39;&lt;iframe src=&quot;</span><span class="si">{src}</span><span class="s1">&quot; width=&quot;</span><span class="si">{width}</span><span class="s1">&quot; height=&quot;</span><span class="si">{height}</span><span class="s1">&quot;&gt;&lt;/iframe&gt;&#39;</span><span class="o">.</span><span class="n">format</span>
-<span class="n">HTML</span><span class="p">(</span><span class="n">iframe</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span> <span class="o">+</span> <span class="mi">5</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><iframe src="https://erddap.axiomdatascience.com/erddap/tabledap/sensor_service.png?time,value,station,longitude,latitude,parameter,unit,depth&time%3E=now-7days&station=%22urn%3Aioos%3Astation%3Anerrs%3Awqbchmet%22&parameter=%22Wind+Speed%22&unit=%22m.s-1%22&.size=450%7C500" width="455" height="505"></iframe></div></div>
-</div>
-<p>This example tells us it is rough and cold out on George’s Bank!</p>
-<p>To explore more datasets, use the IOOS sensor map <a class="reference external" href="https://sensors.ioos.us/#map">website</a>!</p>
+<p>We hope this example demonstrate the flexibility of direct requests to the ERDDAP server used in the Sensor Map.
+In this notebook we:</p>
+<ul class="simple">
+<li><p>Search the server with keywords.</p></li>
+<li><p>Found dataset_ids and checked their metadata.</p></li>
+<li><p>Identified the dataset_id of interested and request data at a specific time period.</p></li>
+</ul>
 </section>
 
     <script type="text/x-thebe-config">
