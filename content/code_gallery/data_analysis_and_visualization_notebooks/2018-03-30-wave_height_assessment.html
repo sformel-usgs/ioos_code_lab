@@ -1,35 +1,45 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Coastal Ocean Wave Height Assessment &#8212; The U.S. Integrated Ocean Observing System (IOOS)</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
@@ -37,602 +47,428 @@
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-546J258RCJ"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-546J258RCJ');
+            </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/code_gallery/data_analysis_and_visualization_notebooks/2018-03-30-wave_height_assessment';</script>
     <link rel="shortcut icon" href="../../../_static/IOOS_logo.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="IOOS models" href="2018-12-04-grids.html" />
     <link rel="prev" title="Investigating ocean models skill for sea surface height with IOOS catalog and Python" href="2018-03-15-ssh-skillscore.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-546J258RCJ"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-546J258RCJ');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../../../_static/IOOS_logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">The U.S. Integrated Ocean Observing System (IOOS)</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Getting Started
- </span>
-</p>
+    
+    
+    <img src="../../../_static/IOOS_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/IOOS_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../ioos_installation_conda.html">
-   Installing the IOOS Conda Environment
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../../ioos_installation_conda.html">Installing the IOOS Conda Environment</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Code Gallery
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Code Gallery</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../data_access.html">
-   Data Access
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2016-10-12-fetching_data.html">
-     Fetching data from CO-OPS ERDDAP with Python tools
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2016-11-15-glider_data_example.html">
-     Plotting Glider data with Python tools
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2016-12-19-exploring_csw.html">
-     How to search the IOOS CSW catalog with Python tools
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2016-12-20-searching_glider_deployments.html">
-     Accessing glider data via the Glider DAC API with Python
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2016-12-22-boston_light_swim.html">
-     The Boston Light Swim temperature analysis with Python
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2017-01-18-siphon-explore-thredds.html">
-     Exploring the THREDDS catalog with Unidata’s Siphon
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2017-03-21-ERDDAP_IOOS_Sensor_Map.html">
-     Read realtime data from IOOS Sensor Map via ERDDAP tabledap
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2017-06-12-NCEI_RA_archive_history.html">
-     Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2017-07-25-HFRadar_currents.html">
-     Near real-time HF-Radar currents in the proximity of the Deepwater Horizon site
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2017-08-01-xtractoR.html">
-     Using the
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       xtractomatic
-      </span>
-     </code>
-     R package to track Pacific Blue Marlin
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2017-09-09-hurricane_irma.html">
-     Exploring the NHC Advisories and Sea Surface Height during Hurricane Irma
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2017-11-30-rerddap.html">
-     Calling R libraries from Python
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2017-12-15-finding_HFRadar_currents.html">
-     Fetching data from a CSW catalog with Python tools
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2018-02-20-obis.html">
-     Using r-obistools and r-obis to explore the OBIS database
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2018-03-01-erddapy.html">
-     erddapy: a python client/URL builder for ERDDAP
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2019-02-26-hurricane_gis_part01.html">
-     Accessing data from SOS using NHC GIS files
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2019-03-08-grids-temperature.html">
-     IOOS models: Temperature Horizontal Slices
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2019-05-27-hurricane_gis_part02.html">
-     Accessing data from SOS using NHC GIS files
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2020-10-10-GTS.html">
-     IOOS GTS Statistics
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_access_notebooks/2021-10-19-multiple-erddap-search.html">
-     Searching multiple ERDDAP servers
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../data_analysis_and_visualization.html">
-   Data Analysis And Visualization
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="2016-11-16-CF-UGRID-SGRID-conventions.html">
-     Parsing Conventions and standards with Python
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="2017-01-23-R-notebook.html">
-     Quick demonstration of R-notebooks using the r-oce library
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="2017-03-30-octave_notebook_example.html">
-     A Matlab notebook primer
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="2018-03-15-ssh-skillscore.html">
-     Investigating ocean models skill for sea surface height with IOOS catalog and Python
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Coastal Ocean Wave Height Assessment
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="2018-12-04-grids.html">
-     IOOS models
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="2020-02-14-QARTOD_ioos_qc_Water-Level-Example.html">
-     IOOS QARTOD software (ioos_qc)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="2021-10-25-ERDDAP-interpolate.html">
-     Interpolating data remotely with ERDDAP
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../data_management.html">
-   Data Management
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_management_notebooks/2017-05-14-running_compliance_checker.html">
-     Shore Station Compliance Checker Script
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_management_notebooks/2017-11-01-Creating-Archives-Using-Bagit.html">
-     Using BagIt to tag oceanographic data
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_management_notebooks/2018-02-27-pocean-timeSeries-demo.html">
-     Creating a CF-1.6 timeSeries using pocean
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../data_management_notebooks/2020-12-08-DataToDwC.html">
-     Aligning Data to Darwin Core
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_access.html">Data Access</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2016-10-12-fetching_data.html">Fetching data from CO-OPS ERDDAP with Python tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2016-11-15-glider_data_example.html">Plotting Glider data with Python tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2016-12-19-exploring_csw.html">How to search the IOOS CSW catalog with Python tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2016-12-20-searching_glider_deployments.html">Accessing glider data via the Glider DAC API with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2016-12-22-boston_light_swim.html">The Boston Light Swim temperature analysis with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-01-18-siphon-explore-thredds.html">Exploring the THREDDS catalog with Unidata’s Siphon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-03-21-ERDDAP_IOOS_Sensor_Map.html">Read realtime data from IOOS Sensor Map via ERDDAP tabledap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-06-12-NCEI_RA_archive_history.html">Using NCEI geoportal REST API to collect information about IOOS Regional Association archived data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-07-25-HFRadar_currents.html">Near real-time HF-Radar currents in the proximity of the Deepwater Horizon site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-08-01-xtractoR.html">Using the <code class="docutils literal notranslate"><span class="pre">xtractomatic</span></code> R package to track Pacific Blue Marlin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-09-09-hurricane_irma.html">Exploring the NHC Advisories and Sea Surface Height during Hurricane Irma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-11-30-rerddap.html">Calling R libraries from Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2017-12-15-finding_HFRadar_currents.html">Fetching data from a CSW catalog with Python tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2018-02-20-obis.html">Using r-obistools and r-obis to explore the OBIS database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2018-03-01-erddapy.html">erddapy: a python client/URL builder for ERDDAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2019-02-26-hurricane_gis_part01.html">Accessing data from SOS using NHC GIS files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2019-03-08-grids-temperature.html">IOOS models: Temperature Horizontal Slices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2019-05-27-hurricane_gis_part02.html">Accessing data from SOS using NHC GIS files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2020-10-10-GTS.html">IOOS GTS Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2021-10-19-multiple-erddap-search.html">Searching multiple ERDDAP servers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_access_notebooks/2022-11-23_pyobis_example.html">Using pyobis to query for known datasets</a></li>
+
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Video Tutorials
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../Video_Demo_Markdown/glos.html">
-   GLOS Links
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../Video_Demo_Markdown/ioos.html">
-   IOOS
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../Video_Demo_Markdown/nanoos.html">
-   NANOOS
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../Video_Demo_Markdown/ooi.html">
-   OOI Demonstration Videos
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../Video_Demo_Markdown/python_dem.html">
-   Python Demonstration Videos
-  </a>
- </li>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../data_analysis_and_visualization.html">Data Analysis And Visualization</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2016-11-16-CF-UGRID-SGRID-conventions.html">Parsing Conventions and standards with Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-01-23-R-notebook.html">Quick demonstration of R-notebooks using the r-oce library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2017-03-30-octave_notebook_example.html">A Matlab notebook primer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2018-03-15-ssh-skillscore.html">Investigating ocean models skill for sea surface height with IOOS catalog and Python</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Coastal Ocean Wave Height Assessment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2018-12-04-grids.html">IOOS models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2020-02-14-QARTOD_ioos_qc_Water-Level-Example.html">IOOS QARTOD software (ioos_qc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2021-10-25-ERDDAP-interpolate.html">Interpolating data remotely with ERDDAP</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Other Resources
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference external" href="https://help.aodn.org.au/aodn-data-tools/user-code-library/">
-   Opening netCDF files - hints from AODN
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference external" href="http://unidata.github.io/notebook-gallery/">
-   Unidata Jupyter Notebook Gallery
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference external" href="http://iobis.org/tutorial/">
-   Extracting and Enriching OBIS data with R
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference external" href="https://github.com/USGS-R">
-   USGS-R Examples
-  </a>
- </li>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../data_management.html">Data Management</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2017-05-14-running_compliance_checker.html">Shore Station Compliance Checker Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2017-11-01-Creating-Archives-Using-Bagit.html">Using BagIt to tag oceanographic data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2018-02-27-pocean-timeSeries-demo.html">Creating a CF-1.6 timeSeries using pocean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2020-12-08-DataToDwC.html">Aligning Data to Darwin Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_management_notebooks/2023-03-20-Reading_and_writing_zarr.html">Reading and writting zarr files with xarray</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Contact Us
- </span>
-</p>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Video Tutorials</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../contact_us.html">
-   Contact Us
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/glos.html">GLOS Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/ioos.html">IOOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/nanoos.html">NANOOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/ooi.html">OOI Demonstration Videos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Video_Demo_Markdown/python_dem.html">Python Demonstration Videos</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://help.aodn.org.au/aodn-data-tools/user-code-library/">Opening netCDF files - hints from AODN</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://unidata.github.io/notebook-gallery/">Unidata Jupyter Notebook Gallery</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://iobis.org/tutorial/">Extracting and Enriching OBIS data with R</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/USGS-R">USGS-R Examples</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contact Us</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../contact_us.html">Contact Us</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            <a href="https://ioos.us">IOOS</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/ioos/ioos_code_lab/main?urlpath=lab/tree/jupyterbook/content/code_gallery/data_analysis_and_visualization_notebooks/2018-03-30-wave_height_assessment.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/ioos/ioos_code_lab/main?urlpath=lab/tree/jupyterbook/content/code_gallery/data_analysis_and_visualization_notebooks/2018-03-30-wave_height_assessment.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../../../_static/images/logo_binder.svg">
   </span>
-<span class="headerbtn__text-container">Binder</span>
+<span class="btn__text-container">Binder</span>
 </a>
-
-      </li>
+</li>
       
-      <li>
-        <a href="https://colab.research.google.com/github/ioos/ioos_code_lab/blob/main/jupyterbook/content/code_gallery/data_analysis_and_visualization_notebooks/2018-03-30-wave_height_assessment.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ioos/ioos_code_lab/blob/main/jupyterbook/content/code_gallery/data_analysis_and_visualization_notebooks/2018-03-30-wave_height_assessment.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../../../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</li>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ioos/ioos_code_lab" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ioos/ioos_code_lab/issues/new?title=Issue%20on%20page%20%2Fcontent/code_gallery/data_analysis_and_visualization_notebooks/2018-03-30-wave_height_assessment.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/code_gallery/data_analysis_and_visualization_notebooks/2018-03-30-wave_height_assessment.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/ioos/ioos_code_lab"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/ioos/ioos_code_lab/issues/new?title=Issue%20on%20page%20%2Fcontent/code_gallery/data_analysis_and_visualization_notebooks/2018-03-30-wave_height_assessment.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../../_sources/content/code_gallery/data_analysis_and_visualization_notebooks/2018-03-30-wave_height_assessment.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
+</div></div>
       
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
+    </div>
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
 </div>
+</div>
+              
+              
 
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Coastal Ocean Wave Height Assessment</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Coastal Ocean Wave Height Assessment</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                    </div>
-                </div>
-            </div>
-            <main id="main-content" role="main">
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="coastal-ocean-wave-height-assessment">
 <h1>Coastal Ocean Wave Height Assessment<a class="headerlink" href="#coastal-ocean-wave-height-assessment" title="Permalink to this headline">#</a></h1>
 <p>Created: 2018-03-30</p>
@@ -701,14 +537,13 @@ title="Print to PDF"
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_dir</span><span class="p">)</span>
 
 <span class="n">fmt</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:*^64}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="p">(</span><span class="s2">&quot;Saving data inside directory </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">save_dir</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving data inside directory </span><span class="si">{</span><span class="n">save_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="p">(</span><span class="s2">&quot; Run information &quot;</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Run date: {:%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Start: {:%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">][</span><span class="s2">&quot;start&quot;</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stop: {:%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">][</span><span class="s2">&quot;stop&quot;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Run date: </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="si">:</span><span class="s2">%Y-%m-%d %H:%M:%S</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Start: </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">][</span><span class="s1">&#39;start&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stop: </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">][</span><span class="s1">&#39;stop&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span>
-    <span class="s2">&quot;Bounding box: </span><span class="si">{0:3.2f}</span><span class="s2">, </span><span class="si">{1:3.2f}</span><span class="s2">,&quot;</span>
-    <span class="s2">&quot;</span><span class="si">{2:3.2f}</span><span class="s2">, </span><span class="si">{3:3.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;region&quot;</span><span class="p">][</span><span class="s2">&quot;bbox&quot;</span><span class="p">])</span>
+    <span class="sa">f</span><span class="s2">&quot;Bounding box: </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">][</span><span class="s1">&#39;bbox&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">3.2f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">][</span><span class="s1">&#39;bbox&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">3.2f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">][</span><span class="s1">&#39;bbox&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">3.2f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">][</span><span class="s1">&#39;bbox&#39;</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="si">:</span><span class="s2">3.2f</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -727,8 +562,8 @@ Bounding box: -71.20, 41.40,-69.20, 43.74
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_filter</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">owslib</span> <span class="kn">import</span> <span class="n">fes</span>
     <span class="kn">from</span> <span class="nn">ioos_tools.ioos</span> <span class="kn">import</span> <span class="n">fes_date_filter</span>
+    <span class="kn">from</span> <span class="nn">owslib</span> <span class="kn">import</span> <span class="n">fes</span>
 
     <span class="n">kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
         <span class="n">wildCard</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">escapeChar</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">singleChar</span><span class="o">=</span><span class="s2">&quot;?&quot;</span><span class="p">,</span> <span class="n">propertyname</span><span class="o">=</span><span class="s2">&quot;apiso:Subject&quot;</span>
@@ -765,11 +600,11 @@ Bounding box: -71.20, 41.40,-69.20, 43.74
 <span class="n">dap_urls</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="p">(</span><span class="s2">&quot; Catalog information &quot;</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">endpoint</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;catalogs&quot;</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">endpoint</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;URL: </span><span class="si">{</span><span class="n">endpoint</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">csw</span> <span class="o">=</span> <span class="n">CatalogueServiceWeb</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">continue</span>
     <span class="n">csw</span> <span class="o">=</span> <span class="n">get_csw_records</span><span class="p">(</span><span class="n">csw</span><span class="p">,</span> <span class="n">filter_list</span><span class="p">,</span> <span class="n">esn</span><span class="o">=</span><span class="s2">&quot;full&quot;</span><span class="p">)</span>
     <span class="n">OPeNDAP</span> <span class="o">=</span> <span class="n">service_urls</span><span class="p">(</span><span class="n">csw</span><span class="o">.</span><span class="n">records</span><span class="p">,</span> <span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;OPeNDAP:OPeNDAP&quot;</span><span class="p">)</span>
@@ -779,14 +614,14 @@ Bounding box: -71.20, 41.40,-69.20, 43.74
     <span class="n">dap</span> <span class="o">=</span> <span class="n">OPeNDAP</span> <span class="o">+</span> <span class="n">odp</span>
     <span class="n">dap_urls</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">dap</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of datasets available: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">csw</span><span class="o">.</span><span class="n">records</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of datasets available: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">csw</span><span class="o">.</span><span class="n">records</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">rec</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">csw</span><span class="o">.</span><span class="n">records</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">title</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">dap</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="p">(</span><span class="s2">&quot; DAP &quot;</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">dap</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.html&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">.html&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Get only unique endpoints.</span>
@@ -836,14 +671,14 @@ http://www.smast.umassd.edu:8080/thredds/dodsC/FVCOM/NECOFS/Forecasts/NECOFS_WAV
     <span class="k">try</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_station</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
             <span class="n">non_stations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="k">except</span> <span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not access URL </span><span class="si">{}</span><span class="s2">. </span><span class="si">{!r}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not access URL </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">e</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">dap_urls</span> <span class="o">=</span> <span class="n">non_stations</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="p">(</span><span class="s2">&quot; Filtered DAP &quot;</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">dap_urls</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.html&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">.html&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -872,7 +707,7 @@ http://www.neracoos.org/thredds/dodsC/WW3/NorthAtlantic.nc.html
 <span class="n">ofrs</span> <span class="o">=</span> <span class="n">collector_ndbc</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">offerings</span>
 <span class="n">title</span> <span class="o">=</span> <span class="n">collector_ndbc</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">identification</span><span class="o">.</span><span class="n">title</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="p">(</span><span class="s2">&quot; NDBC Collector offerings &quot;</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2"> offerings&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ofrs</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ofrs</span><span class="p">)</span><span class="si">}</span><span class="s2"> offerings&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1053,7 +888,7 @@ National Data Buoy Center SOS: 1017 offerings
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/2018-03-30-wave_height_assessment_11_0.png" src="../../../_images/2018-03-30-wave_height_assessment_11_0.png" />
+<img alt="../../../_images/1e757b5179747309d6e2f4053fdaf2e64cad96c00800ac5b36c22171bd66481d.png" src="../../../_images/1e757b5179747309d6e2f4053fdaf2e64cad96c00800ac5b36c22171bd66481d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1104,7 +939,7 @@ National Data Buoy Center SOS: 1017 offerings
 <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="p">(</span><span class="s2">&quot; Models &quot;</span><span class="p">))</span>
 <span class="n">cubes</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">url</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dap_urls</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[Reading url </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">]: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dap_urls</span><span class="p">),</span> <span class="n">url</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[Reading url </span><span class="si">{</span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dap_urls</span><span class="p">)</span><span class="si">}</span><span class="s2">]: </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">check_standard_name</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;cf_names&quot;</span><span class="p">]):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not find </span><span class="si">{}</span><span class="s2"> in </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;cf_names&quot;</span><span class="p">],</span> <span class="n">url</span><span class="p">))</span>
         <span class="k">continue</span>
@@ -1118,7 +953,7 @@ National Data Buoy Center SOS: 1017 offerings
                 <span class="n">units</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;units&quot;</span><span class="p">],</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[Not model data]: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[Not model data]: </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">continue</span>
         <span class="n">mod_name</span> <span class="o">=</span> <span class="n">get_model_name</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="n">cubes</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">mod_name</span><span class="p">:</span> <span class="n">cube</span><span class="p">})</span>
@@ -1129,7 +964,7 @@ National Data Buoy Center SOS: 1017 offerings
         <span class="n">CoordinateNotFoundError</span><span class="p">,</span>
         <span class="ne">IndexError</span><span class="p">,</span>
     <span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cannot get cube for: </span><span class="si">{}</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot get cube for: </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1161,13 +996,13 @@ National Data Buoy Center SOS: 1017 offerings
 <span class="kn">from</span> <span class="nn">iris.pandas</span> <span class="kn">import</span> <span class="n">as_series</span>
 
 <span class="k">for</span> <span class="n">mod_name</span><span class="p">,</span> <span class="n">cube</span> <span class="ow">in</span> <span class="n">cubes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">.nc&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mod_name</span><span class="p">)</span>
+    <span class="n">fname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mod_name</span><span class="si">}</span><span class="s2">.nc&quot;</span>
     <span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="p">(</span><span class="s2">&quot; Downloading to file </span><span class="si">{}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fname</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Downloading to file </span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">))</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">tree</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="n">cube</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">CoordinateNotFoundError</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cannot make KDTree for: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mod_name</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot make KDTree for: </span><span class="si">{</span><span class="n">mod_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">continue</span>
     <span class="c1"># Get model series at observed locations.</span>
     <span class="n">raw_series</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -1180,7 +1015,7 @@ National Data Buoy Center SOS: 1017 offerings
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">series</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">get_nearest_water</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cannot download </span><span class="si">{!r}</span><span class="s2">.</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot download </span><span class="si">{</span><span class="n">cube</span><span class="si">!r}</span><span class="s2">.</span><span class="se">\n</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="n">series</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;No Data&quot;</span>
@@ -1208,7 +1043,7 @@ National Data Buoy Center SOS: 1017 offerings
             <span class="n">cube</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="n">iris</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">cube</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
         <span class="k">del</span> <span class="n">cube</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished processing [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mod_name</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Finished processing [</span><span class="si">{</span><span class="n">mod_name</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1389,7 +1224,6 @@ Finished processing [WW3-NorthAtlanti]
 <span class="kn">import</span> <span class="nn">iris</span>
 <span class="kn">from</span> <span class="nn">folium.plugins</span> <span class="kn">import</span> <span class="n">MarkerCluster</span>
 
-
 <span class="n">big_list</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="s2">&quot;*.nc&quot;</span><span class="p">)):</span>
     <span class="k">if</span> <span class="s2">&quot;OBS_DATA&quot;</span> <span class="ow">in</span> <span class="n">fname</span><span class="p">:</span>
@@ -1414,7 +1248,7 @@ Finished processing [WW3-NorthAtlanti]
     <span class="n">sta_name</span> <span class="o">=</span> <span class="n">all_obs</span><span class="p">[</span><span class="n">station</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
         <span class="n">locations</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">])</span>
-        <span class="n">popups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">]: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">sta_name</span><span class="p">))</span>
+        <span class="n">popups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">]: </span><span class="si">{</span><span class="n">sta_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">MarkerCluster</span><span class="p">(</span><span class="n">locations</span><span class="o">=</span><span class="n">locations</span><span class="p">,</span> <span class="n">popups</span><span class="o">=</span><span class="n">popups</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Cluster&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 </pre></div>
@@ -1480,13 +1314,13 @@ Finished processing [WW3-NorthAtlanti]
                 <span class="n">line_width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                 <span class="n">line_cap</span><span class="o">=</span><span class="s2">&quot;round&quot;</span><span class="p">,</span>
                 <span class="n">line_join</span><span class="o">=</span><span class="s2">&quot;round&quot;</span><span class="p">,</span>
-                <span class="o">**</span><span class="n">kw</span>
+                <span class="o">**</span><span class="n">kw</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="n">leg</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">titles</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">column</span><span class="p">)),</span> <span class="p">[</span><span class="n">line</span><span class="p">]))</span>
+            <span class="n">leg</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">titles</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">column</span><span class="p">,</span><span class="w"> </span><span class="n">column</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">line</span><span class="p">]))</span>
             <span class="n">p</span><span class="o">.</span><span class="n">add_tools</span><span class="p">(</span>
                 <span class="n">HoverTool</span><span class="p">(</span>
                     <span class="n">tooltips</span><span class="o">=</span><span class="p">[</span>
-                        <span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">titles</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">column</span><span class="p">))),</span>
+                        <span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">titles</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">column</span><span class="p">,</span><span class="w"> </span><span class="n">column</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span>
                         <span class="p">(</span><span class="s2">&quot;Bias&quot;</span><span class="p">,</span> <span class="n">bias</span><span class="p">),</span>
                         <span class="p">(</span><span class="s2">&quot;Skill&quot;</span><span class="p">,</span> <span class="n">skill</span><span class="p">),</span>
                     <span class="p">],</span>
@@ -1554,7 +1388,7 @@ Finished processing [WW3-NorthAtlanti]
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./content/code_gallery/data_analysis_and_visualization_notebooks"
         },
         predefinedOutput: true
@@ -1562,52 +1396,87 @@ Finished processing [WW3-NorthAtlanti]
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="2018-03-15-ssh-skillscore.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Investigating ocean models skill for sea surface height with IOOS catalog and Python</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2018-03-15-ssh-skillscore.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Investigating ocean models skill for sea surface height with IOOS catalog and Python</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="2018-12-04-grids.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="2018-12-04-grids.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">IOOS models</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By IOOS<br/>
-  
-    <div class="extra_footer">
-      <a href=https://ioos.noaa.gov> ioos.noaa.gov </a> &nbsp <a href=https://www.facebook.com/usioosgov> Facebook </a> &nbsp <a href=https://www.twitter.com/usioosgov> Twitter </a> &nbsp <a href="mailto:data.ioos@noaa.gov">Contact Us</a> <br> U.S. Integrated Ocean Observing System Program <br> 1315 East-West Highway <br> SSMC3, 2nd Floor <br> Silver Spring, MD 20910 <br> (240) 533-9444
-    </div>
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By IOOS
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href=https://ioos.noaa.gov> ioos.noaa.gov </a> &nbsp <a href=https://www.facebook.com/usioosgov> Facebook </a> &nbsp <a href=https://www.twitter.com/usioosgov> Twitter </a> &nbsp <a href="mailto:data.ioos@noaa.gov">Contact Us</a> <br> U.S. Integrated Ocean Observing System Program <br> 1315 East-West Highway <br> SSMC3, 2nd Floor <br> Silver Spring, MD 20910 <br> (240) 533-9444
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

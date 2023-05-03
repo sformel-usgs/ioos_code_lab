@@ -52,7 +52,7 @@ This make the faster mamba solver default in our installations.
 
 ```
 conda install --name base conda-libmamba-solver --yes
-conda config --set experimental_solver libmamba
+conda config --set solver libmamba
 ```
 
 If that worked you should see:
@@ -118,6 +118,10 @@ Once the environment is done building, you can activate it by typing:
 conda activate IOOS
 ```
 
+Now you can start hacking the notebook with `jupyter nbclassic`,
+for the old style notebooks,
+ or `jupyter-lab` for the new IDE interface.
+
 ## Exiting the IOOS environment
 
 If you want to leave the IOOS environment and return to the root environment,
@@ -168,6 +172,10 @@ Check out [Travis Oliphant's blog piece](http://technicaldiscovery.blogspot.com/
 
 ### What to do when everything seems to be broken?
 
+For example, if you are seeing kernel errors like the one below.
+
+![kernel_error](kernel_error.png)
+
 1. If you believe that only your environment is broken you can follow the [update environment](#updating-the-ioos-environment) instructions from above;
 1. Sometimes conda updates can break backwards compatibility and updating is broken. In those cases remove the Miniforge3 directory and perform a fresh install of the new version.
 1. In rare cases you may want to install a frozen version of the environment. Like, you need the exact same version that is running on our CIs. You can accomplish that by [downloading the lock file your system](https://github.com/ioos/ioos_code_lab/tree/main/.binder) and issuing the command:
@@ -205,6 +213,6 @@ In the example above we are locking for macOS, Linux and Windows.
 
 Windows can be complicated and here are a few tips to help you troubleshoot it:
 
-1. If you did not install Miniforge on your C:\ drive you may have a "long path error." Usually that happens when you see failures in the environment creation;
+1. If you did not install Miniforge on your C:\\ drive you may have a "long path error." Usually that happens when you see failures in the environment creation;
 1. Installation is "successful" but nothing was installed. Please see https://github.com/ContinuumIO/anaconda-issues/issues/6258 for some reasons to why that us happening. Most common ones are aggressive anti-virus or bank apps blocking the installation;
-1. Installation was successful but calling `jupyter notebook` just hangs while "waiting for localhost:" that is probably a firewall setting blocking the notebook or you need to update your packages. See [update environment](#updating-the-ioos-environment).
+1. Installation was successful but calling `jupyter nbclassic` just hangs while "waiting for localhost:" that is probably a firewall setting blocking the notebook or you need to update your packages. See [update environment](#updating-the-ioos-environment).
