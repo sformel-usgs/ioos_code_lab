@@ -21,13 +21,17 @@ dependencies:
   - geojsonio
   - geolinks
   - geopandas
+  - geoplot
   - gridgeo
+  - humanize
   - hvplot
   - ioos_qc
   - ipyleaflet
   - joblib
   - jupyter
+  - jupyter_server <2.0.0
   - jupyter-book >=0.12.1
+  - jupyterlab
   - matplotlib-base
   - nbdime
   - nbval
@@ -38,8 +42,9 @@ dependencies:
   - odvc
   - palettable
   - phantomjs
-  - pocean-core
+  - pocean-core >=3.1
   - pre-commit
+  - pyobis
   - pyoos
   - pyresample
   - pysgrid
@@ -53,6 +58,7 @@ dependencies:
   - simplekml
   - siphon
   - sympy
+  - tabulate
   - thredds_crawler
   - tqdm
   - utide
@@ -60,6 +66,7 @@ dependencies:
   - xarray
   - xlrd
   - xmltodict
+  - zarr
   # R packages.
   - rpy2
   - r-base=4
